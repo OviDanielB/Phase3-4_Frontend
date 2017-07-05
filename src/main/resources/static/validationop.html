@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- META SECTION -->
+<title>GQM+Strategies</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+<!-- END META SECTION -->
+
+<!-- CSS INCLUDE -->
+<link rel="stylesheet" type="text/css" id="theme"
+	href="css/theme-default.css" />
+<!-- EOF CSS INCLUDE -->
+</head>
+<body>
+
+	<!-- START PAGE CONTAINER -->
+	<div class="page-container page-navigation-top">
+
+		<!-- PAGE CONTENT -->
+		<div class="page-content">
+
+			<!-- START X-NAVIGATION VERTICAL -->
+			<ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+				<!-- TOGGLE NAVIGATION -->
+				<li><img src="img/logo.png" /></li>
+				<!-- END TOGGLE NAVIGATION -->
+
+				<!-- SIGN OUT -->
+				<li class="xn-icon-button pull-right"><a href="#"
+					class="mb-control" data-box="#mb-signout"><span
+						class="fa fa-sign-out"></span></a></li>
+				<!-- END SIGN OUT -->
+			</ul>
+			<!-- END X-NAVIGATION VERTICAL -->
+
+			<!-- START CONTENT FRAME -->
+			<div class="content-frame">
+				<!-- START CONTENT FRAME TOP -->
+				<div class="content-frame-top">
+					<div class="page-title">
+						<h2>Define validation</h2>
+						<h2 id="page-title-name">&nbsp-&nbsp</h2>
+					</div>
+				</div>
+
+				<!-- START CONTENT FRAME BODY -->
+				<form class="form-horizontal" >
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="row">
+
+								<!-- PRIMA COLONNA -->
+								<div class="col-md-6">
+									<div class="block">
+										<h4>Insert name and choose the validation type</h4>
+										<div class="form-group">
+											<label class="col-md-3 control-label">Name</label>
+											<div class="col-md-9">
+												<div class="input-group">
+													<span class="input-group-addon"><span
+														class="fa fa-pencil"></span></span> <input type="text"
+														class="form-control" id="nameValidationOp"/>
+												</div>
+												<span class="help-block">Insert the name of
+													validation</span>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-md-3 control-label">Description</label>
+											<div class="col-md-9">
+												<div class="input-group">
+													<span class="input-group-addon"><span
+														class="fa fa-pencil"></span></span> <input type="text"
+														class="form-control" id="description"  />
+												</div>
+												<span class="help-block">Insert the description of
+													validation</span>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-md-3 control-label">Validation Type</label>
+											<div class="col-md-9">
+												<select class="form-control select"
+													id="selectValidationType">
+													<option value="INTERNAL_CONSISTENCY">Internal
+														Consistency</option>
+													<option value="PLAUSIBILITY">Plausibility</option>
+													<option value="ABNORMAL_DATA">Abnormal Data</option>
+													<option value="EXTERNAL_CONSISTENCY">External
+														Consistency</option>
+												</select> <span class="help-block">Select the type of
+													validation</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="block">
+										<h4>Measured Data</h4>
+										<div class="form-group" id="cardinality">
+											<label class="col-md-3 control-label">Cardinality</label>
+											<div class="col-md-9">
+												<select class="form-control select" id="selectCardinality">
+													<option value="one">One</option>
+													<option value="many">Many</option>
+												</select> <span class="help-block">Select the cardinality of
+													the measured data.</span>
+											</div>
+										</div>
+
+										<div class="form-group" style="display: none;" id="operation">
+											<label class="col-md-3 control-label">Aggregation
+												operation</label>
+											<div class="col-md-9">
+												<select class="form-control select" id="selectOperation">
+													<option value="SUM">Sum</option>
+													<option value="AVERAGE">Average</option>
+													<option value="VARIANCE">Variance</option>
+												</select> <span class="help-block">Select the type of
+													aggregation operation for the measured data.</span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- SECONDA COLONNA -->
+								<div class="col-md-6">
+									<div class="block">
+										<h4>Validation criteria</h4>
+										<div class="form-group">
+											<label class="col-md-3 control-label">Comparison type</label>
+											<div class="col-md-9">
+												<select class="form-control select" id="selectComparison">
+													<option value="LESS_THAN">Less than</option>
+													<option value="GREATER_THAN">Greater than</option>
+													<option value="EQUAL">Equal</option>
+													<option value="INSIDE_INTERVAL">Inside interval</option>
+													<option value="OUTSIDE_INTERVAL">Outside interval</option>
+												</select> <span class="help-block">Select the type of
+													comparison.</span>
+											</div>
+										</div>
+
+										<div class="form-group" id="groupInputMeasure">
+											<label class="col-md-3 control-label">Input Measure</label>
+											<div class="col-md-9">
+												<select class="form-control select" id="selectInputMeasure">
+													<option value="measure">Measure reference</option>
+													<option value="user">User defined</option>
+												</select> <span class="help-block">Select if the second
+													measure is inserted by the user or is an other measure
+													collected by the system.</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="block" id="blockMeasureReference">
+										<div class="form-group" id="measureRef">
+											<label class="col-md-3 control-label">Measure</label>
+											<div class="col-md-9">
+												<!-- PROBABILMENTE SI DEVE TOGLIERE LA STRINGA select QUI SOTTO -->
+												<select class="form-control" id="selectMeasureRef">
+													<!-- QUI SI ANDRà A POPOLARE DA JQUERY -->
+													<option value="noMeasure">No measure</option>
+												</select> <span class="help-block">Select the measure to
+													execute the comparison.</span>
+											</div>
+										</div>
+
+										<div class="form-group" id="cardinalityRef">
+											<label class="col-md-3 control-label">Cardinality</label>
+											<div class="col-md-9">
+												<select class="form-control select" id="selectCardinalityRef">
+													<option value="one">One</option>
+													<option value="many">Many</option>
+												</select> <span class="help-block">Select the cardinality of
+													the chosen data.</span>
+											</div>
+										</div>
+
+										<div class="form-group" style="display: none;"
+											id="operationRef">
+											<label class="col-md-3 control-label">Aggregation
+												operation</label>
+											<div class="col-md-9">
+												<select class="form-control select" id="selectOperationRef">
+													<option value="SUM">Sum</option>
+													<option value="AVERAGE">Average</option>
+													<option value="VARIANCE">Variance</option>
+												</select> <span class="help-block">Select the type of
+													aggregation operation for the chosen data.</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="block" id="blockUserDefined" style="display: none;">
+										<div class="form-group">
+											<label class="col-md-3 control-label">Value type</label>
+											<div class="col-md-9">
+												<select class="form-control select" id="valueType">
+													<option value="single">Single value</option>
+													<option value="interval">Interval value</option>
+												</select> <span class="help-block">Select the type of value to
+													insert.</span>
+											</div>
+										</div>
+
+										<div class="form-group" id="singleValueForm">
+											<label class="col-md-3 control-label">Insert value</label>
+											<div class="col-md-9">
+												<div class="input-group">
+													<span class="input-group-addon"><span
+														class="fa fa-pencil"></span></span> <input type="number"
+														class="form-control numeric" id="singleValue"  />
+												</div>
+												<span class="help-block">Insert a number to execute
+													the comparison</span>
+											</div>
+										</div>
+
+										<div class="form-group" style="display: none;"
+											id="intervalValue">
+											<label class="col-md-3 control-label">Insert Interval</label>
+											<div class="col-md-9">
+												<div class="col-md-5">
+													<div class="input-group">
+														<span class="input-group-addon"><span
+															class="fa fa-pencil"></span></span> <input type="number"
+															class="form-control numeric" id="firstValue" />
+													</div>
+												</div>
+
+												<div class="col-md-2"></div>
+
+												<div class="col-md-5">
+													<div class="input-group">
+														<span class="input-group-addon"><span
+															class="fa fa-pencil"></span></span> <input type="number"
+															class="form-control numeric" id="secondValue" />
+													</div>
+												</div>
+												<span class="help-block">Insert a interval to execute
+													the comparison</span>
+											</div>
+										</div>
+									</div>
+									<div class="block">
+										<h4>Countermeasures</h4>
+										<div class="col-md-2"></div>
+
+										<div class="form-group col-md-10">
+											<div class="checkbox" id="repeatMeasure">
+												<label> <input type="checkbox" value="REPEATE_MEASURE" id="checkRepeatMeasure"/>
+													Repeat Measure
+												</label>
+											</div>
+											<div class="checkbox" id="controlMeasure">
+												<label> <input type="checkbox" value="CONTROL_METRIC" id="checkControlMeasure"/>
+													Control metrics
+												</label>
+											</div>
+											<div class="checkbox" id="excludeData">
+												<label> <input type="checkbox" value="EXCLUDE_DATA" id="checkExcludeData"/>
+													Ignore validation
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer">
+							<button class="btn btn-default">Clear Form</button>
+							<button type="button" class="btn btn-primary pull-right" id="buttonSubmit">Submit</button>
+						</div>
+					</div>
+				</form>
+				<!-- END CONTENT FRAME BODY -->
+
+			</div>
+			<!-- END CONTENT FRAME -->
+
+		</div>
+		<!-- END PAGE CONTENT -->
+	</div>
+	<!-- END PAGE CONTAINER -->
+
+	<!-- MESSAGE BOX-->
+	<div class="message-box animated fadeIn" data-sound="alert"
+		id="mb-signout">
+		<div class="mb-container">
+			<div class="mb-middle">
+				<div class="mb-title">
+					<span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?
+				</div>
+				<div class="mb-content">
+					<p>Are you sure you want to log out?</p>
+					<p>Press No if you want to continue work. Press Yes to logout
+						current user.</p>
+				</div>
+				<div class="mb-footer">
+					<div class="pull-right">
+						<a href="pages-login.html" class="btn btn-success btn-lg">Yes</a>
+						<button class="btn btn-default btn-lg mb-control-close">No</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END MESSAGE BOX-->
+
+	<!-- START SCRIPTS -->
+	<!-- START PLUGINS -->
+	<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
+	<!-- END PLUGINS -->
+
+	<!-- START THIS PAGE PLUGINS-->
+
+	<!--<script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script> -->
+
+	<!-- <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>        -->
+	<!-- <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>-->
+	<!-- <script type="text/javascript" src="js/plugins/scrolltotop/scrolltopcontrol.js"></script>-->
+
+
+	<!--<script type="text/javascript" src="js/plugins/morris/raphael-min.js"></script>-->
+	<!--<script type="text/javascript" src="js/plugins/moment.min.js"></script>-->
+	<!-- <script type="text/javascript" src="js/plugins/morris/morris.min.js"></script>    -->
+	<!-- <script type="text/javascript" src="js/plugins/rickshaw/d3.v3.js"></script> -->
+	<!-- <script type="text/javascript" src="js/plugins/rickshaw/rickshaw.min.js"></script> -->
+	<!--<script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>-->
+	<!--<script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>-->
+	<!--<script type='text/javascript' src='js/plugins/bootstrap/bootstrap-datepicker.js'></script>                -->
+	<!--<script type="text/javascript" src="js/plugins/owl/owl.carousel.min.js"></script>     -->
+
+	<!--<script type="text/javascript" src="js/plugins/moment.min.js"></script> -->
+	<!--<script type="text/javascript" src="js/plugins/daterangepicker/daterangepicker.js"></script> -->
+	<script type="text/javascript"
+		src="js/plugins/bootstrap/bootstrap-colorpicker.js"></script>
+	<script type="text/javascript"
+		src="js/plugins/bootstrap/bootstrap-select.js"></script>
+	<script type="text/javascript"
+		src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+	<script type="text/javascript"
+		src="js/plugins/modernizr/modernizr-custom.js"></script>
+
+	<script type="text/javascript" src="js/validationop.js"></script>
+
+	<!-- END THIS PAGE PLUGINS-->
+
+	<!-- START TEMPLATE -->
+	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="js/actions.js"></script>
+
+	<script type="text/javascript" src="js/manage_cookie.js"></script>
+	<script type="text/javascript" src="js/utils.js"></script>
+	<script type="text/javascript" src="js/webapp_config.js"></script>
+
+
+	<!-- END TEMPLATE -->
+	<!-- END SCRIPTS -->
+</body>
+</html>

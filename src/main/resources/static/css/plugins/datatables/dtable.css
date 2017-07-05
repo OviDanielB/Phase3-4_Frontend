@@ -1,0 +1,97 @@
+@CHARSET "UTF-8";
+
+table.datagrid  { 
+	border-collapse: collapse; 
+	text-align: left; 
+	width: 90%;
+    margin-left:5%; 
+    margin-right:5%;
+   
+    
+}
+
+
+table.datagrid td, table.datagrid th { 
+	width: 15%;
+	padding: 11px 15px;
+}
+table.datagrid thead th {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), 
+	color-stop(1, #00557F) );
+	background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');
+	background-color:#006699; 
+	color:#FFFFFF; 
+	font-size: 15px; 
+	font-weight: bold; 
+	border-left: 1px solid #0070A8; 
+	
+} 
+	
+table.datagrid thead th:first-child { border: none; }
+table.datagrid tbody td { 
+	color: #00557F; 
+	border-left: 3px solid #E1EEF4;
+	font-size: 14px;font-weight: normal;
+
+}
+table.datagrid tbody .alt td { 
+	background: #E1EEf4; 
+	color: #00557F; 
+	
+	}
+table.datagrid tbody td:first-child 
+	{ 
+		border-left: none; 
+	}
+table.datagrid tbody tr:last-child td { 
+	border-bottom: none; 
+}
+table.datagrid tfoot td div { 
+	border-top: 1px solid #006699;
+	background: #E1EEf4;
+} 
+table.datagrid tfoot td { 
+	padding: 0; 
+	font-size: 14px 
+} 
+table.datagrid tfoot td div{ 
+	padding: 2px; 
+}
+table.datagrid tfoot td ul { 
+	margin: 0; 
+	padding:0; 
+	list-style: none; 
+	text-align: right; 
+}
+table.datagrid tfoot  li { 
+	display: inline; 
+}
+table.datagrid tfoot li a { 
+	text-decoration: none; 
+	display: inline-block;  
+	padding: 2px 8px; 
+	margin: 1px;
+	color: #FFFFFF;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), 
+	color-stop(1, #00557F) );
+	background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');
+	background-color:#006699; }
+	table.datagrid tfoot ul.active, 
+	table.datagrid tfoot ul a:hover { 
+	text-decoration: none;
+	border-color: #00557F; 
+	color: #FFFFFF; 
+	background: none; 
+	background-color:#006699;}
+	div.dhtmlx_window_active, 
+	div.dhx_modal_cover_dv { position: fixed !important; }
+	 /* Set black background color, white text and some padding */
+
+    footer {
+      margin-top:10%;
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }

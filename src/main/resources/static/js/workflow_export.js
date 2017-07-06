@@ -21,7 +21,7 @@ function exportModelAjaxCall() {
 		$
 				.ajax({
 					type : "POST",
-					url : getUrlBackEnd() + "bus/workflows",
+					url : getPhase4URL() + "bus/workflows",
 					data : JSON.stringify({
 						'name' : wfname,
 						'modelId' : wfmodelId

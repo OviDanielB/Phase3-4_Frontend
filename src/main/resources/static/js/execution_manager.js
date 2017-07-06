@@ -8,7 +8,7 @@ $(document).ready(function(){
 });
 
 function getProcesses(){
-	var urlto = get3242Path() + get3242basePath()+ "/activiti/processes/kermit/kermit";
+	var urlto = getPhase3URL() + "/activiti/processes/kermit/kermit";
 	 $.ajax({
 		 url: urlto
 	        	
@@ -65,12 +65,12 @@ function getProcesses(){
     				"</textarea>");
 	    		}
 	    		
-	    		$('#faseProcesso').html("<a href="+ get3242Path() + get3242basePath() + "/activiti/" +
+	    		$('#faseProcesso').html("<a href="+ getPhase4URL() + "/activiti/" +
 	    				"processInstanceState/"+table.row( this ).data()['id']
 	    		    +">Visualizza l'immagine a schermo intero</a>");	
 	    		
 	    		$("#theImg").remove();
-	    		$('#img').prepend('<img id="theImg" src= "'+get3242Path() + get3242basePath()+'/activiti/processInstanceState/'+ table.row( this ).data()['id']+'" />');
+	    		$('#img').prepend('<img id="theImg" src= "'+ getPhase4URL() + '/activiti/processInstanceState/'+ table.row( this ).data()['id']+'" />');
 
 	    	});
 	    	

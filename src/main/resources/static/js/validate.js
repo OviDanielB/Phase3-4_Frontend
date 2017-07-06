@@ -44,7 +44,7 @@ $(document).ready(function() {
  */
 function ignoreValidation(validationId){
 	$.ajax({
-		'url' : get3242Path() + get3242basePath() + "/validation/ignoreValidation?id="
+		'url' :getPhase4URL() + "/validation/ignoreValidation?id="
 				+ validationId,
 		'type' : 'get',
 		'contentType' : "application/json; charset=utf-8",
@@ -67,7 +67,7 @@ function ignoreValidation(validationId){
  */
 function setValidationDetails() {
 	$.ajax({
-		'url' : get3242Path() + get3242basePath() + "/validation/validationOp?id="
+		'url' : getPhase4URL() + "/validation/validationOp?id="
 				+ validationId,
 		'type' : 'get',
 		'contentType' : "application/json; charset=utf-8",
@@ -94,7 +94,7 @@ function setValidationDetails() {
  */
 function executeValidation(validationId) {
 	$.ajax({
-		'url' : get3242Path() + get3242basePath() + "/validation/validateData?id="
+		'url' :getPhase4URL() + "/validation/validateData?id="
 				+ validationId,
 		'type' : 'get',
 		'contentType' : "application/json; charset=utf-8",
@@ -166,7 +166,7 @@ function repeateMeasure(runtimeTaskId, validationId) {
 	var errorMessage = $('#insertError').val();
 
 	$.ajax({
-		'url' : get3242Path() + get3242basePath() + "/validation/repeateMeasure?idRuntimeTask="
+		'url' : getPhase4URL() + "/validation/repeateMeasure?idRuntimeTask="
 				+ runtimeTaskId +"&idValidationOp="+ validationId + "&errorMessage=" + errorMessage,
 		'type' : 'get',
 		'contentType' : "application/json; charset=utf-8",

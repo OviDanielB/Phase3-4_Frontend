@@ -20,7 +20,7 @@ function deployModelAjaxCall() {
 		$
 				.ajax({
 					type : "POST",
-					url : getUrlBackEnd() + "workflows/deployments",
+					url : getPhase3URL() + "workflows/deployments",
 					data : JSON.stringify({
 						'modelId' : modelId
 					}),
@@ -62,7 +62,7 @@ function checkIfDeployed(modelId) {
 		$
 				.ajax({
 					type : "GET",
-					url : getUrlBackEnd() + "/workflows/"+modelId+"/process-definition-id",
+					url : getPhase3URL() + "/workflows/" + modelId + "/process-definition-id",
 					contentType : "application/json; charset=utf-8",
 					dataType : "json",
 					success : function(response,textStatus, xhr) {

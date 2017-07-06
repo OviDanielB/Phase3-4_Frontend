@@ -3,7 +3,7 @@ var jsonData;
 $(document).ready(function() {
 	checkSystemState();
 
-	var urlto = get3242Path() + get3242basePath()+ "/strategy/getStrategies";
+	var urlto = getPhase3URL() + "/strategy/getStrategies";
     $.ajax({
 
         url: urlto

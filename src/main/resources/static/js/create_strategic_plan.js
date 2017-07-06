@@ -2,7 +2,7 @@ var table;
 var jsonData;
 $(document).ready(function() {
 	checkSystemState();
-	var urlto = get3242Path() + get3242basePath()+ "/strategy/getStrategiesFree";
+	var urlto = getPhase3URL() + "/strategy/getStrategiesFree";
     $.ajax({
         url: urlto
 
@@ -69,7 +69,7 @@ function CreateStrategicPlan(){
             version: vers,
             release: date
         }
-    var urlto = get3242Path() + get3242basePath() + "/strategicPlan/createStrategicPlan";
+    var urlto = getPhase3URL() + "/strategicPlan/createStrategicPlan";
     $.ajax({
 
     	url: urlto,
@@ -80,7 +80,7 @@ function CreateStrategicPlan(){
     });
   
     alert("Strategic Plan creato correttamente");
-    url = getFrontbasePath()+ "/strategic-plans.html"; 
+    url = getFrontbasePath() + "/strategic-plans.html";
 	window.location.href = url	
 	}else{
 		alert("Non puoi selezionare strategie con unità organizzativa differenti!");

@@ -11,14 +11,14 @@ $(document).ready(function(){
 	 id = urlParam('id');
 	 
 	 $.ajax({
-		 url: get3242Path() + get3242basePath() + "/strategicPlan/getStrategicPlan?id=" + id
+		 url: getPhase3URL() + "/strategicPlan/getStrategicPlan?id=" + id
 	        	
 	    }).then(function(sp) {
 	    	strategicPlan = JSON.parse(JSON.stringify(sp));
 	    	
 	    	$.ajax({
 	    		
-	    		url: get3242Path() + get3242basePath() + "/strategicPlan/getStrategiesOfStrategicPlan?id=" + id
+	    		url: getPhase3URL() + "/strategicPlan/getStrategiesOfStrategicPlan?id=" + id
 	   
 	    		
 	    	}).then(function(str) {
@@ -51,7 +51,7 @@ $(document).ready(function(){
 	 
 	 $.ajax({
 		 
-		 url: get3242Path() + get3242basePath() + "/strategicPlan/getStrategiesWithOrganizationalUnitOfStrategicPlan?id=" + id
+		 url: getPhase3URL() + "/strategicPlan/getStrategiesWithOrganizationalUnitOfStrategicPlan?id=" + id
 	        	
 	    }).then(function(data) {
 	    	
@@ -135,7 +135,7 @@ function updateStrategies(){
 	
 	alert(JSON.stringify(strategicPlan.strategyToWorkflowIds));
 	
-	var urlto = get3242Path() + get3242basePath() + "/strategicPlan/updateStrategiesOfStrategicPlan";
+	var urlto = getPhase3URL() + "/strategicPlan/updateStrategiesOfStrategicPlan";
 	
     $.ajax({
     	

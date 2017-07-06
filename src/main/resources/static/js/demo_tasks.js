@@ -47,7 +47,7 @@ $(function() {
 
 										$
 												.ajax({
-													url : getUrlBackEnd()
+													url : getPhase4URL()
 															+ 'tasks/'
 															+ id_task
 															+ '/claim',
@@ -140,7 +140,7 @@ function completeTask(id) {
 
 	// send ajax call for complete task
 	$.ajax({
-		url : getUrlBackEnd() + 'tasks/' + id + '/complete',
+		url : getPhase4URL() + 'tasks/' + id + '/complete',
 		type : 'post',
 		contentType : "application/json; charset=utf-8",
 		data : JSON.stringify(data),

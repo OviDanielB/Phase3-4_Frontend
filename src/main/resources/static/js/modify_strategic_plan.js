@@ -18,7 +18,7 @@ $(document).ready(function(){
 	 id = urlParam('id');
 	
 	 $.ajax({
-		 	url: get3242Path() + get3242basePath() + "/strategicPlan/getStrategicPlan?id=" + id
+		 	url: getPhase3URL() + "/strategicPlan/getStrategicPlan?id=" + id
 	        	
 	    }).then(function(data) {
 	    	
@@ -80,7 +80,7 @@ $(document).ready(function(){
 	    				
 	    		jsonData.attributes = attributes;
 	    			
-	    		var urlto = get3242Path() + get3242basePath() + "/strategicPlan/updateStrategicPlan";
+	    		var urlto = getPhase3URL() + "/strategicPlan/updateStrategicPlan";
 	    		$.ajax({
 
 	    			 url: urlto,
@@ -190,7 +190,7 @@ $(document).ready(function(){
 	    								
 	    									jsonData.attributes = attributes;
 	    								
-	    									var urlto = get3242Path() + get3242basePath() + "/strategicPlan/updateStrategicPlan";
+	    									var urlto = getPhase3URL() + "/strategicPlan/updateStrategicPlan";
 	    									$.ajax({
 	    										url: urlto,
 	    										type: 'post',
@@ -340,7 +340,7 @@ function modifyStrategicPlan() {
 								jsonData.release = windowRelease;
 							}
 							
-					   var urlto = get3242Path() + get3242basePath() + "/strategicPlan/updateStrategicPlan";	
+					   var urlto = getPhase3URL() + "/strategicPlan/updateStrategicPlan";
 						$.ajax({
 							
 							url: urlto,
@@ -414,7 +414,7 @@ function addAttribute(){
 					    p.push(attr);
 					    jsonData.attributes = p;
 					    
-					    var urlto = get3242Path() + get3242basePath() + "/strategicPlan/updateStrategicPlan";
+					    var urlto = getPhase3URL() + "/strategicPlan/updateStrategicPlan";
 						$.ajax({
 							
 							url: urlto,

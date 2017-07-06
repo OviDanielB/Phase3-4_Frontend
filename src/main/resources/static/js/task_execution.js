@@ -11,9 +11,9 @@ $(document).ready(function() {
 
 
 function fetchTaskInfo(taskId) {
-	$.ajax({ url : get3242BackEnd() + "/activiti/userTaskByTaskId/" + taskId}).then(function(data) { 
+	$.ajax({ url : getPhase3URL() + "/activiti/userTaskByTaskId/" + taskId}).then(function(data) {
 		jsonData = JSON.parse(JSON.stringify(data));
-		$.ajax({ url : getUrlBackEnd() + "/tasks/" + taskId + "/description"}).then(function(data) { 
+		$.ajax({ url : getPhase3URL() + "/tasks/" + taskId + "/description"}).then(function(data) {
 			jsonDesc = JSON.parse(JSON.stringify(data));
 			if (jsonData.description =="" || jsonData.description == null) {
 				jsonData.description = jsonDesc.description;
@@ -24,7 +24,7 @@ function fetchTaskInfo(taskId) {
 }
 
 function fetchFormProperties(taskId) {
-	$.ajax({ url : get3242BackEnd() + "/activiti/formDataTask/" + taskId}).then(function(data) { 
+	$.ajax({ url : getPhase3URL() + "/activiti/formDataTask/" + taskId}).then(function(data) {
 		jsonData = JSON.parse(JSON.stringify(data));
 		buildForm(jsonData);
 	});
@@ -34,7 +34,7 @@ function saveTaskData(taskId, completeTask) {
 	taskData = JSON.stringify(completeTask);
 	console.log(taskData);
 	$.ajax({
-		url : get3242BackEnd() + "/activiti/suspendTask/" + taskId,
+		url : getPhase4URL() + "/activiti/suspendTask/" + taskId,
 		method: "POST",
 		contentType: "application/json",
 		data: taskData,

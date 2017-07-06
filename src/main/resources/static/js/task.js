@@ -27,7 +27,7 @@ $(function(){
 function getAllTaskUnassigned(data){
 	
 	$.ajax({
-		url: getUrlBackEnd()+"tasks/unassigned",
+		url: getPhase4URL() + "tasks/unassigned",
 		type: 'get',
 		contentType : "application/json; charset=utf-8",
 		data: data,
@@ -62,7 +62,7 @@ function getAllTaskUnassigned(data){
 function getAllTaskAssigned(data){
 	
 	$.ajax({
-		url: getUrlBackEnd()+"tasks/assigned",
+		url: getPhase4URL() + "tasks/assigned",
 		type: 'get',
 		contentType : "application/json; charset=utf-8",
 		data: data,
@@ -77,7 +77,7 @@ function getAllTaskAssigned(data){
 				                 +'<div class="task-text">'+item.name+'<br><br><span class="fa fa-tag"></span>&nbsp'+item.processDefinitionId+'</div>'
 				                 +'<div class="task-footer">'
 				                     +'<div class="pull-left"><span class="fa fa-sort-amount-desc"></span>Priority&nbsp'+item.priority+'</div>'
-				                     +'<div class="pull-right"><a href="'+getUrlFrontEnd()+getPageTaskExecution()+'?taskId='+item.id+'"><span class="fa fa-tasks">Execute</span></a></div>'
+				                     +'<div class="pull-right"><a href="' + getUrlFrontEnd() + getPageTaskExecution() + '?taskId=' + item.id + '"><span class="fa fa-tasks">Execute</span></a></div>'
 				                 +'</div>'
 				             +'</div>';
    				 $('#tasks_progreess').append(task);

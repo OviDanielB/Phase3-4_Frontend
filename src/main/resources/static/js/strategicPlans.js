@@ -1,7 +1,7 @@
 var list;
 var jsonData;
 $(document).ready(function() {
-	var urlto= get3242Url()+":"+ get3242Port()+get3242basePath()+"/strategicPlan/getStrategicPlans";
+	var urlto= getPhase3URL() + "/strategicPlan/getStrategicPlans";
     $.ajax({
         url: urlto
         	//"http://rest-service.guides.spring.io/greeting"
@@ -52,7 +52,7 @@ $(document).ready(function() {
     		e.stopPropagation();
     		var clickedstrategicPlan =table.row( $(this).parents('tr') ).data();
     		//alert( JSON.stringify(clickedstrategicPlan) );
-    		url= get3242Url()+":"+ get3242Port()+"/"+get3242basePath()+"/strategicPlan/deleteStrategicPlan?id=";
+    		url= getPhase3URL() + "/strategicPlan/deleteStrategicPlan?id=";
     		$.ajax({
     	        url: url+clickedstrategicPlan['id']
     	        	//"http://rest-service.guides.spring.io/greeting"

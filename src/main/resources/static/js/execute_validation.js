@@ -10,7 +10,7 @@ $( document ).ready(function() {
 	
     $.ajax({
 
-        url: get3242Path() + get3242basePath() +"/validation/validationOpList?measureTaskId="+taskId +
+        url: getPhase4URL() +"/validation/validationOpList?measureTaskId=" + taskId +
         "&phase=PHASE_4"
 
     }).then(function(response) {
@@ -43,7 +43,7 @@ $( document ).ready(function() {
 function saveValidation(taskId) {
 	
 	$.ajax({
-		'url' : get3242Path() + get3242basePath() + "/validation/completeValidation?taskId="
+		'url' : getPhase4URL() + "/validation/completeValidation?taskId="
 				+ taskId,
 		'type' : 'get',
 		'contentType' : "application/json; charset=utf-8",

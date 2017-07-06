@@ -27,7 +27,7 @@ function getMeasureTask(taskId) {
 	};
 
 	$.ajax({
-		url : getUrlBackEnd() + 'measurement-collection/',
+		url : getPhase4URL() + 'measurement-collection/',
 		type : 'get',
 		contentType : "application/json; charset=utf-8",
 		data : data,
@@ -71,7 +71,7 @@ function collectMeasure() {
 
 	
 	$.ajax({
-		url : getUrlBackEnd() + 'measurement-collection?runtimeTaskId='+runtimeTaskId,
+		url : getPhase4URL() + 'measurement-collection?runtimeTaskId='+runtimeTaskId,
 		type : 'post',
 		contentType : "application/json; charset=utf-8",
 		data : JSON.stringify(collected_data),

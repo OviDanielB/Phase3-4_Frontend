@@ -16,7 +16,7 @@ function terminateWorkflowAjaxCall() {
 
 	$.ajax({
 				type : "POST",
-				url : getUrlBackEnd()+"BusinessEndingMessages",
+				url : getPhase4URL() + "BusinessEndingMessages",
 				data : JSON.stringify({
 					'businessWorkflowProcessInstanceId' : bWfProcInstanceId
 				}),
@@ -47,7 +47,7 @@ function TerminateButton() {
 
 function obtainWorkflowsList() {
 	$.ajax({
-		url : getUrlBackEnd() + '/workflowdatas/?ended=false',
+		url : getPhase3URL() + '/workflowdatas/?ended=false',
 		type : 'get',
 		contentType : "application/json; charset=utf-8",
 		success : function(workflowDataList) {//per ogni jsonObject (ogni JsonObject è un workflowData)

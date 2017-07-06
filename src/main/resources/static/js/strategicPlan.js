@@ -7,7 +7,7 @@ $(document).ready(function(){
 	var id = urlParam('id');
 	 $.ajax({
 
-	        url: get3242Url()+":"+ get3242Port()+get3242basePath()+"/strategicPlan/getStrategicPlan?id="+id
+	        url: getPhase3URL() + "/strategicPlan/getStrategicPlan?id=" + id
 	        	//"http://rest-service.guides.spring.io/greeting"
 	    }).then(function(data) {
 	    	
@@ -19,8 +19,7 @@ $(document).ready(function(){
 	    	$('#versionrow').append(jsonData.version);
 	    	$('#releaserow').append(jsonData.release);
 	    	
-	    	$.ajax({url : get3242Url()+":"+ get3242Port()+get3242basePath()+"/strategicPlan/getMetaWorkflows?id="
-				+ id
+	    	$.ajax({url : getPhase3URL() + "/strategicPlan/getMetaWorkflows?id=" + id
 						// "http://rest-service.guides.spring.io/greeting"
 				})
 				.then(function(data) {
@@ -109,7 +108,7 @@ function AddAttribute(){
 	
 	$.ajax({
 
-        url: get3242Url()+":"+ get3242Port()+get3242basePath()+'/strategicPlan/updateStrategicPlan',
+        url: getPhase3URL() + '/strategicPlan/updateStrategicPlan',
        type: 'post',
         contentType: 'application/json',
         data: JSON.stringify(jsonData)
@@ -153,7 +152,7 @@ function deleteAttribute(){
 			
 			$.ajax({
 
-		        url: get3242Url()+":"+ get3242Port()+get3242basePath()+'/strategicPlan/updateStrategicPlan',
+		        url: getPhase3URL() + '/strategicPlan/updateStrategicPlan',
 		        type: 'post',
 		        contentType: 'application/json',
 		        data: JSON.stringify(jsonData)
@@ -250,7 +249,7 @@ function updateAttribute(){
 				jsonData.attributes = attributes;
 			
 				$.ajax({
-					url: get3242Url()+":"+ get3242Port()+get3242basePath()+'/strategicPlan/updateStrategicPlan',
+					url: getPhase3URL() + '/strategicPlan/updateStrategicPlan',
 					type: 'post',
 					contentType: 'application/json',
 					data: JSON.stringify(jsonData)

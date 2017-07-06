@@ -8,7 +8,7 @@ $( document ).ready(function() {
 
     $.ajax({
 
-        url: get3242Path() + get3242basePath() +"/validation/measureTasks?businessWorkflowProcessDefinitionId="+
+        url: getPhase3URL() + "/validation/measureTasks?businessWorkflowProcessDefinitionId="+
         processDefinitionId
 
     }).then(function(response) {

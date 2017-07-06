@@ -5,8 +5,7 @@ $(document)
     .ready(
         function () {
             checkSystemState();
-            var urlto = get3242Path() + get3242basePath()
-                + "/strategicPlan/getStrategicPlans";
+            var urlto = getPhase3URL() + "/strategicPlan/getStrategicPlans";
             $
                 .ajax({
                     url: urlto
@@ -126,8 +125,7 @@ $(document)
                                                 .parents(
                                                     'tr'))
                                         .data();
-                                    url = get3242Path()
-                                        + get3242basePath()
+                                    url = getPhase3URL()
                                         + "/strategicPlan/deleteStrategicPlan?id=";
                                     $
                                         .ajax({
@@ -153,7 +151,7 @@ $(document)
                                                     'tr'))
                                         .data();
                                     url = getFrontbasePath()
-                                        + "/workflow-managment.html?id=";
+                                        + "/workflow-management.html?id=";
                                     window.location.href = url
                                         + clickedstrategicPlan['id'];
 

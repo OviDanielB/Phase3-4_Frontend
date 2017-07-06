@@ -18,27 +18,27 @@ var myWindow;
 function doRedirect() {
 	// Genera il link alla pagina che si desidera raggiungere
 	myWindow.close();
-	location.href = get3242BackEnd() + "/activiti/activitiExplorerModeler/"
+	location.href = getPhase3URL() + "/activiti/activitiExplorerModeler/"
 			+ idBusinessWorkflow;
 }
 
 function doRedirect(modelId) {
 	// Genera il link alla pagina che si desidera raggiungere
 	myWindow.close();
-	location.href = get3242BackEnd() + "/activiti/activitiExplorerModeler/"
+	location.href = getPhase3URL() + "/activiti/activitiExplorerModeler/"
 			+ idBusinessWorkflow;
 }
 
 function createWorkflowBusiness() {
 
-	myWindow = window.open(get3242BackEnd() + "/activiti/activitiExplorerLogin/kermit/kermit");
+	myWindow = window.open(getPhase3URL() + "/activiti/activitiExplorerLogin/kermit/kermit");
 	
 	window.setTimeout("doRedirect()", 2500);
 }
 
 function createWorkflowBusiness(modelId) {
 
-	myWindow = window.open(get3242BackEnd() + "/activiti/activitiExplorerLogin/kermit/kermit");
+	myWindow = window.open(getPhase3URL() + "/activiti/activitiExplorerLogin/kermit/kermit");
 	
 	window.setTimeout(doRedirect.bind(null, modelId), 3000);
 
@@ -48,7 +48,7 @@ function createWorkflowBusiness(modelId) {
 function getStrategies(strategicPlanId) {
 	$("#strategyDescription").fadeOut();
 	$("#createWorkflowBusiness").fadeOut();
-	$.ajax({url : get3242BackEnd() + "/strategicPlan/getStrategyWithWorkflow?strategicPlanId=" + strategicPlanId}).then(
+	$.ajax({url : getPhase3URL() + "/strategicPlan/getStrategyWithWorkflow?strategicPlanId=" + strategicPlanId}).then(
 		function(data) {
 			var jsonStrategies = JSON.parse(JSON.stringify(data));
 			if (strategiesTable != null)
@@ -69,7 +69,7 @@ function getStrategies(strategicPlanId) {
 				$("#listStrategies .odd").css('background-color', "inherit");
 				$("#listStrategies .even").css('background-color', "inherit");
 				$(this).css('background-color', "#D6D5C3");
-				$.ajax({url: get3242BackEnd() + "/strategicPlan/getStrategyWorkflowData/?strategicPlanId=" + strategicPlanId + "&strategyId=" + strategyId}).then(function(data) {
+				$.ajax({url: getPhase3URL() + "/strategicPlan/getStrategyWorkflowData/?strategicPlanId=" + strategicPlanId + "&strategyId=" + strategyId}).then(function(data) {
 					var strategyWorkflow = JSON.parse(JSON.stringify(data));
 					idBusinessWorkflow = strategyWorkflow.workflow.businessWorkflowModelId;
 					$("#strategyDescription").fadeIn();
@@ -81,7 +81,7 @@ function getStrategies(strategicPlanId) {
 }
 
 function getStrategicPlans() {
-	$.ajax({ url : get3242BackEnd() + "/strategicPlan/getStrategicPlans"}).then(function(data) { 
+	$.ajax({ url : getPhase3URL() + "/strategicPlan/getStrategicPlans"}).then(function(data) {
 		jsonData = JSON.parse(JSON.stringify(data));
 		console.log(jsonData.strategicPlans); 
 		var strategicPlanTable = $('#listStrategicPlans').DataTable(

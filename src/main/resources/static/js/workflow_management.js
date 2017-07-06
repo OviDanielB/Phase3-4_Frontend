@@ -9,12 +9,12 @@ $(document)
 				function() {
 					checkSystemState();
 					id = urlParam('id');
-					$.ajax({url : get3242Path()+get3242basePath()+"/strategicPlan/getStrategicPlan?id="
+					$.ajax({url : getPhase3URL() + "/strategicPlan/getStrategicPlan?id="
 						+ id}).then(function(sp) {
 										strategicPlan = JSON.parse(JSON
 												.stringify(sp));
 
-										$.ajax({url : get3242Path() + get3242basePath() + "/strategicPlan/getMetaWorkflows?id=" + id
+										$.ajax({url : getPhase3URL() + "/strategicPlan/getMetaWorkflows?id=" + id
 														// "http://rest-service.guides.spring.io/greeting"
 												})
 												.then(function(data) {
@@ -116,7 +116,7 @@ function getWorkflowName( strategyName, strategyid){
 					e.preventDefault();
 					if(v){
 						$.prompt.close();
-						var urltobend=get3242Path() + get3242basePath()+"/strategicPlan/setMetaWorkflow";
+						var urltobend = getPhase3URL() + "/strategicPlan/setMetaWorkflow";
 						 var wfdata = {
 						            strategyId: strategyid,
 						            strategcPlanId: id,

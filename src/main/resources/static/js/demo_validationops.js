@@ -37,8 +37,7 @@ function getValidationOps(processDefinitionId, taskId, measureName) {
 	};
 
 	$.ajax({
-		url : get3242Path() + get3242basePath()
-				+ "/validation/validationOpList",
+		url : getPhase3URL() + "/validation/validationOpList",
 		type : 'get',
 		contentType : "application/json; charset=utf-8",
 		dataType : "json",
@@ -96,7 +95,7 @@ function getValidationOps(processDefinitionId, taskId, measureName) {
  */
 function deleteValidation(validationId) {
 	$.ajax({
-		url : get3242Path() + get3242basePath() + "/validation/validationOp?id="
+		url : getPhase3URL() + "/validation/validationOp?id="
 				+ validationId,
 		type : 'delete',
 		contentType : "application/json; charset=utf-8",

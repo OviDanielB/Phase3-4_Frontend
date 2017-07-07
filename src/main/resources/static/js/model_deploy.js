@@ -20,7 +20,7 @@ function deployModelAjaxCall() {
 		$
 				.ajax({
 					type : "POST",
-					url : getPhase3URL() + "workflows/deployments",
+					url : getPhase3URL() + "/workflows/deployments",
 					data : JSON.stringify({
 						'modelId' : modelId
 					}),

@@ -6,7 +6,7 @@ $(document).ready(function() {
 function populateIssueMessagesView() {
 	$.ajax({
 		type : "GET",
-		url : getPhase4URL() + "bus/issueMessages",
+		url : getPhase4URL() + "/bus/issueMessages",
 		contentType : "application/json; charset=utf-8",
 		dataType : "json",
 		success : function(response, textStatus, xhr) {

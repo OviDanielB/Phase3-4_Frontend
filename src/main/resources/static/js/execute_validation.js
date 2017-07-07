@@ -43,7 +43,7 @@ $( document ).ready(function() {
 function saveValidation(taskId) {
 	
 	$.ajax({
-		'url' : getPhase4URL() + "/validation/completeValidation?taskId="
+		'url' : getPhase4URL() + "validation/completeValidation?taskId="
 				+ taskId,
 		'type' : 'get',
 		'contentType' : "application/json; charset=utf-8",

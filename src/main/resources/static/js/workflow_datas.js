@@ -6,7 +6,7 @@ $(document).ready(function() {
 function populateListWorkflowView() {
 	$.ajax({
 		type : "GET",
-		url : getPhase3URL() + "workflowdatas",
+		url : getPhase3URL() + "/workflowdatas",
 		contentType : "application/json; charset=utf-8",
 		dataType : "json",
 		success : function(response, textStatus, xhr) {

@@ -16,7 +16,7 @@ function terminateWorkflowAjaxCall() {
 
 	$.ajax({
 				type : "POST",
-				url : getPhase4URL() + "BusinessEndingMessages",
+				url : getPhase4URL() + "/BusinessEndingMessages",
 				data : JSON.stringify({
 					'businessWorkflowProcessInstanceId' : bWfProcInstanceId
 				}),

@@ -1,19 +1,24 @@
 $(function() {
-	if (getCookie("role").indexOf("Strategic Planner") > -1) {
-		$("li.strategic-plans-button").show();
-	} else
-		$("li.strategic-plans-button").hide();
+	// if (getCookie("role").indexOf("Strategic Planner") > -1) {
+	// 	$("li.strategic-plans-button").show();
+	// } else
+	// 	$("li.strategic-plans-button").hide();
+    //
+	// if (getCookie("role").indexOf("GQM Expert") > -1) {
+	// 	$("li.measurement-plan-workflows-button").show();
+	// 	$("li.issue-messages-button").show();
+	// 	$("li.end-workflow-button").show();
+	// } else {
+	// 	$("li.measurement-plan-workflows-button").hide();
+	// 	$("li.issue-messages-button").hide();
+	// 	$("li.end-workflow-button").hide();
+	// }
+	$("li.strategic-plans-button").show();
+    $("li.measurement-plan-workflows-button").show();
+	$("li.issue-messages-button").show();
+	$("li.end-workflow-button").show();
 
-	if (getCookie("role").indexOf("GQM Expert") > -1) {
-		$("li.measurement-plan-workflows-button").show();
-		$("li.issue-messages-button").show();
-		$("li.end-workflow-button").show();
-	} else {
-		$("li.measurement-plan-workflows-button").hide();
-		$("li.issue-messages-button").hide();
-		$("li.end-workflow-button").hide();
-	}
-	var tasks = function() {
+    var tasks = function() {
 
 		$("#tasks,#tasks_progreess,#tasks_completed")
 				.sortable(
@@ -48,7 +53,7 @@ $(function() {
 										$
 												.ajax({
 													url : getPhase4URL()
-															+ 'tasks/'
+															+ '/tasks/'
 															+ id_task
 															+ '/claim',
 													type : 'post',
@@ -140,7 +145,7 @@ function completeTask(id) {
 
 	// send ajax call for complete task
 	$.ajax({
-		url : getPhase4URL() + 'tasks/' + id + '/complete',
+		url : getPhase4URL() + '/tasks/' + id + '/complete',
 		type : 'post',
 		contentType : "application/json; charset=utf-8",
 		data : JSON.stringify(data),

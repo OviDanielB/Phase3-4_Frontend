@@ -17,7 +17,7 @@ $(document).ready(function() {responseList.getTotal()
 //Retrieve workflow images
 function getWorkflowImage(modelId){
 	
-	 	$('#workflow_image').prepend('<img id="workflow_image_src" src="' + getPhase3URL() + 'measurement-plan/image?modelId=' + modelId + '" />')
+	 	$('#workflow_image').prepend('<img id="workflow_image_src" src="' + getPhase3URL() + '/measurement-plan/image?modelId=' + modelId + '" />')
 
 }
 
@@ -31,7 +31,7 @@ function getMetricAndTasks(modelId){
 	
 	var data = {'modelId' : modelId};
 	$.ajax({
-		url: getPhase3URL() + 'measurement-plan',
+		url: getPhase3URL() + '/measurement-plan',
 		type: 'get',
 		contentType : "application/json; charset=utf-8",
 		data: data,
@@ -197,7 +197,7 @@ function saveTasks(){
 		strategy.measureTasksList = measureTasksList;
 		
 		$.ajax({
-			 url: getPhase3URL() + 'measurement-plan',
+			 url: getPhase3URL() + '/measurement-plan',
 			 type: 'post',
 			 contentType : "application/json; charset=utf-8",
 			 data: JSON.stringify(strategy),

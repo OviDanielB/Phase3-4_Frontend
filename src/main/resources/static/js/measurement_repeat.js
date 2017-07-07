@@ -31,7 +31,7 @@ function getMeasureTaskAndCollectedData(taskId, collectedDataId) {
 	};
 
 	$.ajax({
-		url : getPhase4URL() + 'measurement-repeat/',
+		url : getPhase4URL() + '/measurement-repeat/',
 		type : 'get',
 		contentType : "application/json; charset=utf-8",
 		data : data,
@@ -78,7 +78,7 @@ function repeatMeasure() {
 	collected_data.validated = false;
 	
 	$.ajax({
-		url : getPhase4URL() + 'measurement-repeat/?runtimeTaskId='+taskId,
+		url : getPhase4URL() + '/measurement-repeat/?runtimeTaskId='+taskId,
 		type : 'post',
 		contentType : "application/json; charset=utf-8",
 		data : JSON.stringify(collected_data),

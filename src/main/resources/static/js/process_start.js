@@ -19,7 +19,7 @@ function startProcessAjaxCall() {
 		$
 				.ajax({
 					type : "POST",
-					url : getPhase4URL() + "workflows/processinstances",
+					url : getPhase4URL() + "/workflows/processinstances",
 					data : JSON.stringify({
 						'processDefinitionId' : procDefId
 					}),
@@ -61,7 +61,7 @@ function checkIfStarted(procDefId) {
 		$
 				.ajax({
 					type : "GET",
-					url : getPhase4URL() + "/workflows/"+procDefId+"/process-instance",
+					url : getPhase4URL() + "/workflows/" + procDefId + "/process-instance",
 					contentType : "application/json; charset=utf-8",
 					dataType : "json",
 					success : function(response,textStatus, xhr) {

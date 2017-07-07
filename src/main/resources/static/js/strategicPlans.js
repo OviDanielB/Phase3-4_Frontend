@@ -64,7 +64,7 @@ $(document).ready(function() {
     	$('#myTable tbody').on( 'click', '#addwftosp', function (e) {
     		e.stopPropagation();
     		var clickedstrategicPlan =table.row( $(this).parents('tr') ).data();
-    		url= getFrontbasePath()+"workflowManagment.html?id=";
+    		url= getFrontbasePath()+"/workflow-management.html?id=";
     		window.location.href = url+clickedstrategicPlan['id'];
 	        
 	    } );

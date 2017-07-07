@@ -27,7 +27,7 @@ $(function(){
 function getAllTaskUnassigned(data){
 	
 	$.ajax({
-		url: getPhase4URL() + "tasks/unassigned",
+		url: getPhase4URL() + "/tasks/unassigned",
 		type: 'get',
 		contentType : "application/json; charset=utf-8",
 		data: data,
@@ -62,7 +62,7 @@ function getAllTaskUnassigned(data){
 function getAllTaskAssigned(data){
 	
 	$.ajax({
-		url: getPhase4URL() + "tasks/assigned",
+		url: getPhase4URL() + "/tasks/assigned",
 		type: 'get',
 		contentType : "application/json; charset=utf-8",
 		data: data,

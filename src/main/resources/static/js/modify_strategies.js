@@ -11,14 +11,14 @@ $(document).ready(function(){
 	 id = urlParam('id');
 	 
 	 $.ajax({
-		 url: getPhase3URL() + "/strategicPlan/getStrategicPlan?id=" + id
+		 url: getPhase4URL() + "/strategicPlan/getStrategicPlan?id=" + id
 	        	
 	    }).then(function(sp) {
 	    	strategicPlan = JSON.parse(JSON.stringify(sp));
 	    	
 	    	$.ajax({
 	    		
-	    		url: getPhase3URL() + "/strategicPlan/getStrategiesOfStrategicPlan?id=" + id
+	    		url: getPhase4URL() + "/strategicPlan/getStrategiesOfStrategicPlan?id=" + id
 	   
 	    		
 	    	}).then(function(str) {
@@ -51,7 +51,7 @@ $(document).ready(function(){
 	 
 	 $.ajax({
 		 
-		 url: getPhase3URL() + "/strategicPlan/getStrategiesWithOrganizationalUnitOfStrategicPlan?id=" + id
+		 url: getPhase4URL() + "/strategicPlan/getStrategiesWithOrganizationalUnitOfStrategicPlan?id=" + id
 	        	
 	    }).then(function(data) {
 	    	
@@ -135,7 +135,7 @@ function updateStrategies(){
 	
 	alert(JSON.stringify(strategicPlan.strategyToWorkflowIds));
 	
-	var urlto = getPhase3URL() + "/strategicPlan/updateStrategiesOfStrategicPlan";
+	var urlto = getPhase4URL() + "/strategicPlan/updateStrategiesOfStrategicPlan";
 	
     $.ajax({
     	

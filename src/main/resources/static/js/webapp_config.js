@@ -5,7 +5,7 @@ var phase3BackEnd = {
 }
 
 var phase4BackEnd = {
-	'host' : 'http://localhost:8082',
+	'host' : 'http://localhost:8084',
     'war' : ''
 }
 

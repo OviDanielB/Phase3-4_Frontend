@@ -32,7 +32,7 @@ function getAllTaskUnassigned(data){
 		contentType : "application/json; charset=utf-8",
 		data: data,
         headers: {
-            'Access-Control-Allow-Origin': 'localhost'
+            'Access-Control-Allow-Origin': '*'
         },
 		success: function(response){ 
 			  

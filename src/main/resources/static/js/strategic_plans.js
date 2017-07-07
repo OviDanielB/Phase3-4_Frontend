@@ -5,7 +5,7 @@ $(document)
     .ready(
         function () {
             checkSystemState();
-            var urlto = getPhase3URL() + "/strategicPlan/getStrategicPlans";
+            var urlto = getPhase4URL() + "/strategicPlan/getStrategicPlans";
             $
                 .ajax({
                     url: urlto
@@ -125,7 +125,7 @@ $(document)
                                                 .parents(
                                                     'tr'))
                                         .data();
-                                    url = getPhase3URL()
+                                    url = getPhase4URL()
                                         + "/strategicPlan/deleteStrategicPlan?id=";
                                     $
                                         .ajax({

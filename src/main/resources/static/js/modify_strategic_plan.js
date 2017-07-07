@@ -18,7 +18,7 @@ $(document).ready(function(){
 	 id = urlParam('id');
 	
 	 $.ajax({
-		 	url: getPhase3URL() + "/strategicPlan/getStrategicPlan?id=" + id
+		 	url: getPhase4URL() + "/strategicPlan/getStrategicPlan?id=" + id
 	        	
 	    }).then(function(data) {
 	    	

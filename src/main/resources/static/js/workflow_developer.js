@@ -48,7 +48,7 @@ function createWorkflowBusiness(modelId) {
 function getStrategies(strategicPlanId) {
 	$("#strategyDescription").fadeOut();
 	$("#createWorkflowBusiness").fadeOut();
-	$.ajax({url : getPhase3URL() + "/strategicPlan/getStrategyWithWorkflow?strategicPlanId=" + strategicPlanId}).then(
+	$.ajax({url : getPhase4URL() + "/strategicPlan/getStrategyWithWorkflow?strategicPlanId=" + strategicPlanId}).then(
 		function(data) {
 			var jsonStrategies = JSON.parse(JSON.stringify(data));
 			if (strategiesTable != null)
@@ -69,7 +69,7 @@ function getStrategies(strategicPlanId) {
 				$("#listStrategies .odd").css('background-color', "inherit");
 				$("#listStrategies .even").css('background-color', "inherit");
 				$(this).css('background-color', "#D6D5C3");
-				$.ajax({url: getPhase3URL() + "/strategicPlan/getStrategyWorkflowData/?strategicPlanId=" + strategicPlanId + "&strategyId=" + strategyId}).then(function(data) {
+				$.ajax({url: getPhase4URL() + "/strategicPlan/getStrategyWorkflowData/?strategicPlanId=" + strategicPlanId + "&strategyId=" + strategyId}).then(function(data) {
 					var strategyWorkflow = JSON.parse(JSON.stringify(data));
 					idBusinessWorkflow = strategyWorkflow.workflow.businessWorkflowModelId;
 					$("#strategyDescription").fadeIn();
@@ -81,7 +81,7 @@ function getStrategies(strategicPlanId) {
 }
 
 function getStrategicPlans() {
-	$.ajax({ url : getPhase3URL() + "/strategicPlan/getStrategicPlans"}).then(function(data) {
+	$.ajax({ url : getPhase4URL() + "/strategicPlan/getStrategicPlans"}).then(function(data) {
 		jsonData = JSON.parse(JSON.stringify(data));
 		console.log(jsonData.strategicPlans); 
 		var strategicPlanTable = $('#listStrategicPlans').DataTable(

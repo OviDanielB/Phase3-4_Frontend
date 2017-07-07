@@ -31,6 +31,9 @@ function getAllTaskUnassigned(data){
 		type: 'get',
 		contentType : "application/json; charset=utf-8",
 		data: data,
+        headers: {
+            'Access-Control-Allow-Origin': 'localhost'
+        },
 		success: function(response){ 
 			  
 			var taskList = response.data; 
@@ -66,6 +69,9 @@ function getAllTaskAssigned(data){
 		type: 'get',
 		contentType : "application/json; charset=utf-8",
 		data: data,
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
 		success: function(response){ 
 			  
 			var taskList = response.data; 

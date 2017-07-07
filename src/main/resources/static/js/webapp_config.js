@@ -40,7 +40,7 @@ function getFrontbasePath() {
 	return webAppFrontEndconfig.war;
 }
 
-var loginPageUri = "http://localhost:8081/index.html";
+var loginPageUri = "http://localhost:8084/index.html";
 var MeasurementPlanPathNoEdit = "measurement-plan-no-edit.html";
 
 function getLoginPageUri() {

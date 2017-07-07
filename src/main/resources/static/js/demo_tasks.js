@@ -59,6 +59,9 @@ $(function() {
 													type : 'post',
 													contentType : "application/json; charset=utf-8",
 													data : JSON.stringify(data),
+													headers: {
+                                                        'Access-Control-Allow-Origin': '*'
+													},
 													success : function(response) {
 
 														ui.item
@@ -149,6 +152,9 @@ function completeTask(id) {
 		type : 'post',
 		contentType : "application/json; charset=utf-8",
 		data : JSON.stringify(data),
+        header: {
+            'Access-Control-Allow-Origin': '*'
+        },
 		success : function(response) {
 			// remove task from visualization
 			if ($(".task-complete").hasClass(id)) {

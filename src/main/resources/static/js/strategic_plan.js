@@ -7,7 +7,7 @@ $(document).ready(function(){
 	var id = urlParam('id');
 	 $.ajax({
 
-	        url: getPhase4URL() + "/strategicPlan/getStrategicPlan?id=" + id
+	        url: getPhase3URL() + "/strategicPlan/getStrategicPlan?id=" + id
 
 	        	//"http://rest-service.guides.spring.io/greeting"
 	    }).then(function(data) {

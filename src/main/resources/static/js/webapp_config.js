@@ -12,7 +12,7 @@ var phase4BackEnd = {
 var webAppFrontEndconfig = {
 	'host' : 'http://localhost',
 	'war' : '',
-	'port' : '8080',
+	'port' : '8082',
 	'page_system_state' : 'pages-state-not-ready.html',
 	'page_task_execution' : '/task-execution.html'
 }

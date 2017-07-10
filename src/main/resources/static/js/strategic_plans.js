@@ -5,7 +5,7 @@ $(document)
     .ready(
         function () {
             checkSystemState();
-            var urlto = getPhase4URL() + "/strategicPlan/getStrategicPlans";
+            var urlto = getPhase3URL() + "/strategicPlan/getStrategicPlans";
             $
                 .ajax({
                     url: urlto

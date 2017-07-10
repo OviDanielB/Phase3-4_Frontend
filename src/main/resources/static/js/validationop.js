@@ -86,7 +86,7 @@ function updateValidation(processDefinitionId, measureName, measureId, validatio
 	
 	console.log(validationOp);
 	$.ajax({
-		'url' : getPhase4URL() +"/validation/validationOp?id=" + validationId,
+		'url' : getPhase3URL() +"/validation/validationOp?id=" + validationId,
 		'type' : 'PUT',
 		'contentType' : "application/json; charset=utf-8",
 		'dataType' : "json",

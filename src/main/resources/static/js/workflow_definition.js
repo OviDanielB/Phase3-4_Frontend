@@ -62,7 +62,7 @@ function getStrategies(strategicPlanId) {
 }
 
 function getStrategicPlans() {
-	$.ajax({ url : getPhase4URL() + "/strategicPlan/getStrategicPlans"}).then(function(data) {
+	$.ajax({ url : getPhase3URL() + "/strategicPlan/getStrategicPlans"}).then(function(data) {
 		jsonData = JSON.parse(JSON.stringify(data));
 		console.log(jsonData.strategicPlans); 
 		var strategicPlanTable = $('#listStrategicPlans').DataTable(

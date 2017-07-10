@@ -2,7 +2,7 @@ var table;
 var jsonData;
 $(document).ready(function () {
     checkSystemState();
-    var urlto = getPhase4URL() + "/strategy/getStrategiesFree";
+    var urlto = getPhase3URL() + "/strategy/getStrategiesFree";
     $.ajax({
         url: urlto
         //"http://rest-service.guides.spring.io/greeting"
@@ -80,7 +80,7 @@ function CreateStrategicPlan() {
                         window.location.href = url
                     },
                     error: function (error) {
-                        alert("Errore nella creazione del piano strategico");
+                        alert("Errore nella creazione del piano strategico" + error);
                     }
                 })
 

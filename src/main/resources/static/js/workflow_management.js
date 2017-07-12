@@ -12,7 +12,6 @@ $(document)
                 url: getPhase3URL() + "/strategicPlan/getStrategicPlan?id=" + id
             }).then(function (sp) {
                 strategicPlan = JSON.parse(JSON.stringify(sp));
-                console.log(sp);
                 $.ajax({
                     url: getPhase3URL() + "/strategicPlan/getMetaWorkflows?id=" + id
                     // "http://rest-service.guides.spring.io/greeting"
@@ -22,7 +21,6 @@ $(document)
                         $('#versionrow').append(strategicPlan.version);
                         $('#releaserow').append(strategicPlan.release);
                         var strategy = JSON.parse(JSON.stringify(data));
-                        console.log(strategy);
                         var emptyStrategy = [];
                         for (var stm in strategy.strategyToMetaworkflow) {
 //																alert(JSON.stringify(strategy.strategyToMetaworkflow[stm].metaworkflow));

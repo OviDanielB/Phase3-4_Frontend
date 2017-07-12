@@ -59,16 +59,11 @@ $(function() {
 													type : 'post',
 													contentType : "application/json; charset=utf-8",
 													data : JSON.stringify(data),
-													headers: {
-                                                        'Access-Control-Allow-Origin': '*'
-													},
 													success : function(response) {
 
 														ui.item
-																.find(
-																		".task-footer")
-																.append(
-																		'<div class="pull-right"><a href="'
+																.find(".task-footer")
+																.append('<div class="pull-right"><a href="'
 																				+ getUrlFrontEnd()
 																				+ getPageTaskExecution()
 																				+ '?taskId='

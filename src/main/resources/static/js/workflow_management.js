@@ -5,8 +5,7 @@ var windowName;
 var id;
 
 $(document)
-    .ready(
-        function () {
+    .ready(function () {
             checkSystemState();
             id = urlParam('id');
             $.ajax({
@@ -27,8 +26,8 @@ $(document)
                         var emptyStrategy = [];
                         for (var stm in strategy.strategyToMetaworkflow) {
 //																alert(JSON.stringify(strategy.strategyToMetaworkflow[stm].metaworkflow));
-                            console.log(stm);
-                            if (stm.metaworkflow == null)
+                            stm = JSON.parse(JSON.stringify(strategy.strategyToMetaworkflow[stm]));
+                            if (stm.metaworkflow === null)
                                 emptyStrategy.push(stm.strategy);
                         }
                         table = $('#strategies')

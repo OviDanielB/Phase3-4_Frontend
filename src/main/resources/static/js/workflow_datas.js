@@ -14,7 +14,7 @@ function populateListWorkflowView() {
 
 			$.each(response, function(i, item) {
 
-				if(item.measureTasksList!=null){
+				if(item.measureTasksList != null){
 					var workflowItem = $('<li/>').appendTo(workflowList);
 					workflowItem.append('<li>'
 							+ '<a href="' + getMeasurementPlanPathNoEdit(

@@ -1,6 +1,6 @@
 
 var phase3BackEnd = {
-	'host' : 'http://localhost:8081',
+	'host' : 'http://localhost:8083',
 	'war' : ''
 }
 
@@ -40,7 +40,7 @@ function getFrontbasePath() {
 	return webAppFrontEndconfig.war;
 }
 
-var loginPageUri = "http://localhost:8084/index.html";
+var loginPageUri = "http://10.200.207.42:8081/index.html";
 var MeasurementPlanPathNoEdit = "measurement-plan-no-edit.html";
 
 function getLoginPageUri() {

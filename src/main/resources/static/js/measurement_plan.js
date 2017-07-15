@@ -41,7 +41,7 @@ function getMetricAndTasks(modelId){
 			
 			flowElements = response.flowElements;
 			metrics = response.metrics;
-			groups = response.gropus;
+			groups = response.groups;
 			workflowData = response.workflowData;
 
 
@@ -66,15 +66,16 @@ function getMetricAndTasks(modelId){
 				$('#source').attr('id', 'source'+val.id);	
 
 			
-				if(workflowData != null){
-					$.each(workflowData.measureTasksList, function(k, v){
+				if(workflowData !== null){
+
+					$.each(workflowData.measureTasksList, function(k, v) {
 						
 						var name = v.metric.name;
 						var responsible = v.responsible;
 						var means = v.means;
 						var source = v.source;
 					
-						if(val.id == v.taskId){
+						if(val.id === v.taskId){
 							//Fill source
 							//$('#row'+v.taskId).find('input').val(v.source).prop('disabled', true);
 

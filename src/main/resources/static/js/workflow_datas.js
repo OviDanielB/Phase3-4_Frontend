@@ -12,6 +12,8 @@ function populateListWorkflowView() {
 		success : function(response, textStatus, xhr) {
 			var workflowList = $('#workflowListId');
 
+			console.log(response);
+
 			$.each(response, function(i, item) {
 
 				if(item.measureTasksList != null){

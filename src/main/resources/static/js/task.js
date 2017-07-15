@@ -1,11 +1,11 @@
 $(function(){
-	/*
+
 	//Check user cookie
 	if(getCookie("username") == "kermit"){
 		console.log("kermit");
 	}
 	//if(getCookie("role") != ''){
-	*/
+
 
 	checkSystemState();
 	
@@ -25,6 +25,8 @@ $(function(){
 
 //Request all task unassigned for a particular role group
 function getAllTaskUnassigned(data){
+
+	console.log(data);
 	
 	$.ajax({
 		url: getPhase4URL() + "/tasks/unassigned",
@@ -34,10 +36,11 @@ function getAllTaskUnassigned(data){
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
-		success: function(response){ 
-			  
-			var taskList = response.data; 
-			
+		success: function(response){
+            console.log(response.data);
+
+            var taskList = response.data;
+
 			$.each(taskList, function(i, item) {
 						
 				//Populates unassigned task
@@ -55,8 +58,9 @@ function getAllTaskUnassigned(data){
 			});
 		 },
 		 error: function(err){
-			var error = $.parseJSON(err.responseText);
-			alert(error.errorCode + " "+ error.message);
+			//var error = $.parseJSON(err.responseText);
+			//alert(error.errorCode + " "+ error.message);
+			 console.log(err);
 		 }
 	});
 }

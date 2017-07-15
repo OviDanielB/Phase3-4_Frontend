@@ -11,9 +11,9 @@ $(document).ready(function() {
 
 
 function fetchTaskInfo(taskId) {
-	$.ajax({ url : getPhase3URL() + "/activiti/userTaskByTaskId/" + taskId}).then(function(data) {
+	$.ajax({ url : getPhase4URL() + "/activiti/userTaskByTaskId/" + taskId}).then(function(data) {
 		jsonData = JSON.parse(JSON.stringify(data));
-		$.ajax({ url : getPhase3URL() + "/tasks/" + taskId + "/description"}).then(function(data) {
+		$.ajax({ url : getPhase4URL() + "/tasks/" + taskId + "/description"}).then(function(data) {
 			jsonDesc = JSON.parse(JSON.stringify(data));
 			if (jsonData.description =="" || jsonData.description == null) {
 				jsonData.description = jsonDesc.description;
@@ -24,7 +24,7 @@ function fetchTaskInfo(taskId) {
 }
 
 function fetchFormProperties(taskId) {
-	$.ajax({ url : getPhase3URL() + "/activiti/formDataTask/" + taskId}).then(function(data) {
+	$.ajax({ url : getPhase4URL() + "/activiti/formDataTask/" + taskId}).then(function(data) {
 		jsonData = JSON.parse(JSON.stringify(data));
 		buildForm(jsonData);
 	});

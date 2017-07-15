@@ -18,10 +18,11 @@ function exportModelAjaxCall() {
 		document.getElementById('errorPanelDiv').innerHTML = "The modelId is null!";
 		document.getElementById("errorDiv").style.display = "block";
 	} else {
+
 		$
-				.ajax({
+            .ajax({
 					type : "POST",
-					url : getPhase4URL() + "/bus/workflows",
+					url : getPhase3URL() + "/bus/workflows",
 					data : JSON.stringify({
 						'name' : wfname,
 						'modelId' : wfmodelId
@@ -31,7 +32,6 @@ function exportModelAjaxCall() {
 						var name = getURLParameter('name');
 						document.getElementById('successPanelDiv').innerHTML = "Workflow exported, the instance is "+name;
 						document.getElementById("successDiv").style.display = "block";
-
 					},
 					error : function(err) {
 						var json_obj = $.parseJSON(err.responseText);
@@ -45,7 +45,7 @@ function exportModelAjaxCall() {
 
 					}
 				});
-	}
+    }
 }
 
 function ExportButton() {

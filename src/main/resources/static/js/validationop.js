@@ -86,7 +86,7 @@ function updateValidation(processDefinitionId, measureName, measureId, validatio
 	
 	console.log(validationOp);
 	$.ajax({
-		'url' : getPhase3URL() +"/validation/validationOp?id=" + validationId,
+		'url' : getPhase4URL() +"/validation/validationOp?id=" + validationId,
 		'type' : 'PUT',
 		'contentType' : "application/json; charset=utf-8",
 		'dataType' : "json",
@@ -160,11 +160,11 @@ function createValidation(processDefinitionId, measureName, measureId) {
 	};
 			
 	$.ajax({
-		'url' : getPhase3URL() + "/validation/validationOp",
-		'type' : 'POST',
-		'contentType' : 'application/json; charset=utf-8',
-		'dataType' : 'json',
-		'data' : JSON.stringify(validationOp),
+		url : getPhase4URL() + "/validation/validationOp",
+		type : 'POST',
+		contentType : 'application/json; charset=utf-8',
+		dataType : 'json',
+		data : JSON.stringify(validationOp),
 		success : function(response) {
 			window.location.href = getUrlFrontEnd() + "/validationop-list.html?processDefinitionId=" +
 			processDefinitionId + "&measureName="+ measureName + "&taskId="+ measureId;
@@ -182,12 +182,10 @@ function createValidation(processDefinitionId, measureName, measureId) {
  */
 function getValidationDetails(validationId) {
 	$.ajax({
-		'url' : getPhase3URL() + "/validation/validationOp?id="
-				+ validationId,
-		'type' : 'get',
-		'contentType' : "application/json; charset=utf-8",
-		'dataType' : "json",
-		
+		url : getPhase4URL() + "/validation/validationOp?id=" + validationId,
+		type : 'get',
+		contentType : "application/json; charset=utf-8",
+		dataType : "json",
 		success : function(response) {
 			var validationOp = JSON.parse(JSON.stringify(response));
 

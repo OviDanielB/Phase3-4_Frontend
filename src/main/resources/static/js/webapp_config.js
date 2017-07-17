@@ -44,12 +44,12 @@ function getFrontbasePath() {
 }
 
 var loginPageUri = "http://localhost:8080/Integrazione/index.html";
-var MeasurementPlanPathNoEdit = "measurement-plan-no-edit.html";
+var MeasurementPlanPath = "measurement-plan.html";
 
 function getLoginPageUri() {
 	return loginPageUri;
 }
 
-function getMeasurementPlanPathNoEdit(modelId, name) {
-	return MeasurementPlanPathNoEdit + "?modelId=" + modelId + "&name=" + name;
+function getMeasurementPlanPath(modelId, name) {
+	return MeasurementPlanPath + "?modelId=" + modelId + "&name=" + name;
 }

@@ -19,7 +19,7 @@ function populateListWorkflowView() {
 				if(item.measureTasksList != null){
 					var workflowItem = $('<li/>').appendTo(workflowList);
 					workflowItem.append('<li>'
-							+ '<a href="' + getMeasurementPlanPathNoEdit(
+							+ '<a href="' + getMeasurementPlanPath(
 								item.businessWorkflowModelId, item.businessWorkflowName)
 							+ '">' + item.businessWorkflowName + '</a></li>');
 					workflowItem.append(this.innerHTML);

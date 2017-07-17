@@ -16,7 +16,7 @@
 	href="css/theme-default.css" />
 <!-- EOF CSS INCLUDE -->
 </head>
-<body>
+<body ng-app="main">
 	<!-- START PAGE CONTAINER -->
 	<div class="page-container page-navigation-top">
 
@@ -24,27 +24,26 @@
 		<div class="page-content">
 
 			<!-- START X-NAVIGATION VERTICAL -->
-			<ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+			<ul class="x-navigation x-navigation-horizontal x-navigation-panel" ng-controller="navBar">
 				<!-- TOGGLE NAVIGATION -->
 				<li><img src="img/logo.png" /></li>
 				<!-- END TOGGLE NAVIGATION -->
 				<li class="measurement-plan-workflows-button"><a
 					style="width: auto;" href="strategic-plans.html" target="_blank">
-						<span class="fa" style="width: auto; font-weight: bold">Strategic Plans</span>
+						<span class="fa" style="width: auto; font-weight: bold">{{tabs.str_plan}}</span>
 				</a></li>
 				<li class="issue-messages-button"><a style="width: auto;"
 					href="issue-messages.html" target="_blank"> <span
-						class="fa fa-envelope" style="width: auto; font-weight: bold">Issue
-							Messages</span>
+						class="fa fa-envelope" style="width: auto; font-weight: bold">{{tabs.issue_message}}</span>
 				</a></li>
 				<li class="measurement-plan-workflows-button"><a
 					style="width: auto;" href="measurement-plan-workflows.html"
 					target="_blank"> <span class="fa"
-						style="width: auto; font-weight: bold">Measurement Plans</span>
+						style="width: auto; font-weight: bold">{{tabs.measurement_plan}}</span>
 				</a></li>
 				<li class="end-workflow-button"><a style="width: auto;"
 					href="workflows/end.html" target="_blank"> <span class="fa"
-						style="width: auto; font-weight: bold">Terminate a Workflow</span>
+						style="width: auto; font-weight: bold">{{tabs.terminate_workflow}}</span>
 				</a></li>
 				<!-- SIGN OUT -->
 				<li class="xn-icon-button pull-right"><a href="#"
@@ -142,6 +141,8 @@
 	<script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
 	<script type="text/javascript"
 		src="js/plugins/bootstrap/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="js/angular/main.js"></script>
 	<!-- END PLUGINS -->
 
 

@@ -78,7 +78,9 @@ function getAllTaskAssigned(data){
         },
 		success: function(response){ 
 			  
-			var taskList = response.data; 
+			var taskList = response.data;
+
+			console.log(response.data);
 			
 			$.each(taskList, function(i, item) {
 					
@@ -107,6 +109,11 @@ function getAllTaskAssigned(data){
 
 //Create pop up and insert item inside
 function insertInPopUP(item){
+
+	var desc = "No description avaiable"
+	if(item.description != null){
+		desc = convert(item.description);
+	}
 	
 	var win = '<div class="message-box message-box-info animated fadeIn" id="box'+item.id+'">'+
 		'<div class="mb-container">'+
@@ -117,13 +124,16 @@ function insertInPopUP(item){
 				
 				'<div class="mb-content">'+
 					'<p>'+
-					convert(item.description);
+					desc +
 					'</p>'+
 				'</div>'+
 	
 				'</div>'+
 			'</div>'+
 		'</div>';
+
+
+
 	return win;
 
 }

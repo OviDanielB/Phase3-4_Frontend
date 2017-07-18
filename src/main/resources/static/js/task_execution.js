@@ -93,7 +93,13 @@ function handleClick(taskId) {
 function getTaskInfo(task) {
 	$("#taskId").text("#" + task.id);
 	$("#taskName").text(task.name);
-	$("#taskDescription").html(convert(task.description));
+
+	if(task.description != null){
+        $("#taskDescription").html(task.description);
+	} else {
+        $("#taskDescription").html("No description available");
+
+    }
 }
 
 /**

@@ -83,6 +83,17 @@ function urlParam(name){
     }
 }
 
+function createMetaworkflow() {
+    var stratId = getURLParameter("id");
+    if (stratId != null) {
+        window.location.href = "/workflow-management.html?id="+stratId;
+    } else {
+        document.getElementById('errorPanelDiv').innerHTML = "The strategic plan id is null!";
+        document.getElementById("errorDiv").style.display = "block";
+	}
+}
+
+
 function AddAttribute(){
 	
 	if($("#name").val() !="" && $("#type").val() != "" && $("#value").val() != ""){

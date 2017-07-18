@@ -7,6 +7,9 @@ var id;
 $(document)
     .ready(function () {
             checkSystemState();
+
+            document.getElementById('startBtn').style.display = "none";
+
             id = urlParam('id');
             $.ajax({
                 url: getPhase3URL() + "/strategicPlan/getStrategicPlan?id=" + id
@@ -105,6 +108,7 @@ function getWorkflowName(strategyName, strategyid) {
                         strategcPlanId: id,
                         name: f.name
                     };
+                    console.log(wfdata);
                     $.ajax({
                         type: "POST",
                         url: urltobend,
@@ -112,8 +116,8 @@ function getWorkflowName(strategyName, strategyid) {
                         contentType: "application/json; charset=utf-8",
                         dataType: "json"
                     }).then(function (sp) {
+                        document.getElementById('startBtn').style.display = "block";
                         location.reload();
-
                     });
                 }
                 else
@@ -124,5 +128,15 @@ function getWorkflowName(strategyName, strategyid) {
     $.prompt(statesdemo);
 
 
+}
+
+function startConstruction() {
+    var stratId = getURLParameter("id");
+    if (stratId != null) {
+        window.location.href = "/workflow-definition.html?id="+stratId;
+    } else {
+        document.getElementById('errorPanelDiv').innerHTML = "The strategic plan id is null!";
+        document.getElementById("errorDiv").style.display = "block";
+    }
 }
 

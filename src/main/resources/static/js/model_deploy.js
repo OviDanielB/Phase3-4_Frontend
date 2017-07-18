@@ -89,3 +89,14 @@ function checkIfDeployed(modelId) {
 	}
 	
 }
+
+function exportWorkflow() {
+	var modelId = getURLParameter('modelId');
+
+    if (modelId == null) {
+        document.getElementById('errorPanelDiv').innerHTML = "The modelId is null!";
+        document.getElementById("errorDiv").style.display = "block";
+    } else {
+    	location.href = getPhase3URL() + '/models/export.html?=modelId' + modelId;
+    }
+}

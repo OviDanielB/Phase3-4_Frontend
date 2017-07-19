@@ -15,8 +15,8 @@ var myWindow;
 function doRedirect() {
 	// Genera il link alla pagina che si desidera raggiungere
 	// myWindow.close();
-	myWindow.location.href = getFrontbasePath() + '/models/deploy.html?modelId=' + idBusinessWorkflow;
-    location.href = getPhase3URL() + "/activiti/activitiExplorerModeler/"
+	location.href = getFrontbasePath() + '/models/deploy.html?modelId=' + idBusinessWorkflow;
+    myWindow.location.href = getPhase3URL() + "/activiti/activitiExplorerModeler/"
 			+ idBusinessWorkflow;
 }
 

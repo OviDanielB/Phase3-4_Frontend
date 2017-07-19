@@ -47,7 +47,7 @@ function TerminateButton() {
 
 function obtainWorkflowsList() {
 	$.ajax({
-		url : getPhase3URL() + '/workflowdatas/?ended=false',
+		url : getPhase4URL() + '/workflowdatas/?ended=false',
 		type : 'get',
 		contentType : "application/json; charset=utf-8",
 		success : function(workflowDataList) {//per ogni jsonObject (ogni JsonObject è un workflowData)

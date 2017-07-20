@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
         <!-- EOF CSS INCLUDE -->
     </head>
-    <body>
+    <body ng-app="measurementPlanModule">
 
 
         <!-- START PAGE CONTAINER -->
@@ -41,7 +41,7 @@
                 <!-- END X-NAVIGATION VERTICAL -->
 
                 <!-- START CONTENT FRAME -->
-                <div class="content-frame">
+                <div class="content-frame" ng-controller="ontologyController">
                     <!-- START CONTENT FRAME TOP -->
                     <div class="content-frame-top">
                         <div class="page-title">
@@ -55,6 +55,115 @@
                     	<div id="workflow_image" style=" display: table;margin: 0 auto;">
                     	</div>
                     	<br><br>
+
+                        <div class="row">
+                            <h3>Available Metrics </h3>
+                        </div>
+
+                        <table class="table">
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Type</th>
+                                <th>MM Type</th>
+                                <th>Scale</th>
+                                <th>Unit</th>
+                                <th>Entities & Attributes </th>
+                            </tr>
+
+                            <tr ng-repeat="metric in metrics">
+                                <td>{{metric.measurementModel.name}}</td>
+                                <td>{{metric.measurementModel.description}}</td>
+                                <td>{{metric.measurementModel.metricType}}</td>
+                                <td>{{metric.measurementModel.modelType}}</td>
+                                <td>{{metric.scale.name + "["+metric.scale.type+"]"}}</td>
+                                <td>{{metric.unit.name}}</td>
+                                <!--<td><p ng-repeat="e in metric.internals">{{e.entity.name}}</p></td> -->
+                                <td>
+                                    <table class="table">
+                                        <tr>
+                                            <th>Entity</th>
+                                            <th>Attribute</th>
+                                            <th>Type</th>
+                                        </tr>
+                                        <tr ng-repeat="e in metric.internals">
+                                            <td>{{e.entity.name+" "+ e.entity.surname}}</td>
+                                            <td>{{e.name}}</td>
+                                            <td>Internal</td>
+                                        </tr>
+                                        <tr ng-repeat="e in metric.externals">
+                                            <td>{{e.entity.name +" "+ e.entity.surname}}</td>
+                                            <td>{{e.name}}</td>
+                                            <td>External</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr >
+                        </table>
+
+                        <table class="table">
+                            <tr>
+                                <th>Task</th>
+                                <th>Metric</th>
+                                <th>Attribute</th>
+                                <th>Scope</th>
+                                <th>Time / Event</th>
+                                <th>Source</th>
+                                <th>Responsible</th>
+                                <th>Means</th>
+                            </tr>
+
+                            <tr ng-repeat="task in tasks">
+                                <td>{{task.id}}</td>
+                                <td>
+                                    <select name="metric" id="metricSelect" ng-model="task.selected.metric">
+                                        <option disabled  value="">Metric</option>
+                                        <option ng-repeat="m in metrics" value="{{m.measurementModel.name}}">{{m.measurementModel.name}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="attribute" id="attributeSelect" ng-model="task.selected.attribute">
+                                        <option disabled  value="">What ?</option>
+                                        <option ng-repeat="i in attributes" value="{{i.name}}">{{i.name+"["+i.entity.name+"]"}}</option>
+                                            <!-- <option ng-repeat="e in ont.externals" value="{{e.name}}">{{e.name}}</option> -->
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" name="scope" ng-model="task.selected.scope" placeholder="where ?">
+                                </td>
+                                <td>
+                                    <input type="text" name="time" ng-model="task.selected.time" placeholder="when ?">
+                                </td>
+                                <td>
+                                    <input type="text" name="source" ng-model="task.selected.source" placeholder="from where? ">
+                                </td>
+                                <td>
+                                    <select name="group" id="groupSelect" ng-model="task.selected.group">
+                                        <option disabled value="">Who ?</option>
+                                        <option ng-repeat="g in groups" value="{{g.id}}">{{g.id}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="means" id="meansSelect" ng-model="task.selected.means" >
+                                        <option disabled value="">How ?</option>
+                                        <option value="Automatic">Automatic</option>
+                                        <option value="Manual">Manual</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                        <div class="row">
+                            SELECTED : {{tasks[0].selected}}
+                        </div>
+
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+
+
                     	<div class="row">
                     		<div class="col-md-3">
                     			<h3>Task</h3>
@@ -102,6 +211,9 @@
 	                             </select>
                                  <input id="old_means" class="form-control" style="display:none"/>
 	                    	</div>
+                        </div>
+
+                        <div class="row" >
                         </div>
 
 
@@ -158,6 +270,7 @@
         <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-colorpicker.js"></script>
         <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
         <script type="text/javascript" src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 
         <!-- END THIS PAGE PLUGINS-->
 
@@ -172,6 +285,8 @@
 
         <script type="text/javascript" src="js/task.js"></script>
         <script type="text/javascript" src="js/measurement_plan.js"></script>
+
+        <script type="application/javascript" src="js/angular/measurementPlanModule.js"></script>
 
 
         <!-- END TEMPLATE -->

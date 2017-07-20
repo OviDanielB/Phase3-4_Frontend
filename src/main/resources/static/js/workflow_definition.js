@@ -1,8 +1,13 @@
 var strategiesTable;
 
-var jsonWorkflowBusiness;
 var jsonData;
 var idBusinessWorkflow;
+
+var status = {
+    MODIFIED : 0,
+    NOTMODIFIED : 1,
+    NEW : 2
+};
 
 $(document).ready(function() {
 	checkSystemState();
@@ -34,99 +39,122 @@ function goToPopulateBusinessWorkflow() {
 
 	var processDefinitionId;
     $.ajax({
-        url: getPhase3URL() + "/strategicPlan/getMetaworkflowOfStrategicPlan?id=" + getURLParameter('id'),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response, textStatus, xhr) {
-            console.log(response);
-            var res =JSON.parse(JSON.stringify(response));
+            url: getPhase3URL() + "/strategicPlan/getStrategyWorkflowRelationOfStrategicPlan?id=" + getURLParameter("id"),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response, textStatus, xhr) {
+                console.log(response);
+                var res = JSON.parse(JSON.stringify(response));
 
-            $.each(res.metaWorkflowList, function (i, item) {
-            	var keyName = item.metaWorkflowName;
-            	console.log(keyName);
+                // for each workflowData associated with a strategicPlan
+                $.each(res.strategyWorkflowRelationList, function (i, item) {
 
-                    $.ajax({
-                        url: getPhase3URL() + "/activiti/instances?processDefinitionKey=" + keyName,
-                        type: "GET",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
+                    if (item.strategy.id == strategyId) {
+                        var keyName = item.workflow.metaWorkflowName;
+                        console.log(keyName);
 
-                        success: function (response, textStatus, xhr) {
-                            console.log(response);
-                            var res = JSON.parse(JSON.stringify(response));
-                            processDefinitionId = res.processDefinitionId;
-                            console.log(processDefinitionId);
-                            $.ajax({
-                                type: "POST",
-                                url: getPhase3URL() + "/workflows/complete-task?processDefinitionId=" + processDefinitionId,
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                success: function (response) {
-                                    console.log(response);
-                                    document.getElementById('successPanelDiv').innerHTML = response.businessWorkflowProcessInstanceId;
-                                    document.getElementById("successDiv").style.display = "block";
 
-                                },
-                                error: function (err) {
-                                    var json_obj = $.parseJSON(err.responseText);
-                                    if (!json_obj.errorCode || !json_obj.message) {
-                                        document.getElementById('errorPanelDiv').innerHTML = "Expired timeout interval";
-                                    } else {
-                                        document.getElementById('errorPanelDiv').innerHTML = json_obj.errorCode
-                                            + json_obj.message;
+                        $.ajax({
+
+                            // retrieve processed definition key associated with a metaworflow
+                            url: getPhase3URL() + "/activiti/instances?processDefinitionKey=" + keyName,
+                            type: "GET",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+
+                            success: function (response, textStatus, xhr) {
+                                console.log(response);
+                                var res = JSON.parse(JSON.stringify(response));
+                                processDefinitionId = res.processDefinitionId;
+                                console.log(processDefinitionId);
+                                $.ajax({
+                                    type: "POST",
+                                    url: getPhase3URL() + "/workflows/complete-task?processDefinitionId=" + processDefinitionId,
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: function (response) {
+                                        console.log(response);
+                                        document.getElementById('successPanelDiv').innerHTML = response.businessWorkflowProcessInstanceId;
+                                        document.getElementById("successDiv").style.display = "block";
+
+                                    },
+                                    error: function (err) {
+                                        var json_obj = $.parseJSON(err.responseText);
+                                        if (!json_obj.errorCode || !json_obj.message) {
+                                            document.getElementById('errorPanelDiv').innerHTML = "Expired timeout interval";
+                                        } else {
+                                            document.getElementById('errorPanelDiv').innerHTML = json_obj.errorCode
+                                                + json_obj.message;
+                                        }
+                                        document.getElementById("errorDiv").style.display = "block";
+
                                     }
-                                    document.getElementById("errorDiv").style.display = "block";
-
-                                }
-                            });
-                        }
-            		});
-        		});
-
-        },
-        error: function (err, xhr) {
-            console.log(err.responseText);
-
+                                });
+                            }
+                        });
+                    }
+                });
+            },
+            error: function (err, xhr) {
+                console.log(err.responseText);
+            }
         }
-    });
-
+    );
 }
 
 function getStrategies(strategicPlanId) {
-	$("#strategyDescription").fadeOut();
-	$("#createWorkflowBusiness").fadeOut();
-	$.ajax({url : getPhase3URL() + "/strategicPlan/getStrategyWithWorkflow?strategicPlanId=" + strategicPlanId}).then(
-		function(data) {
-			var jsonStrategies = JSON.parse(JSON.stringify(data));
-			if (strategiesTable != null)
-				strategiesTable.destroy();
-			$('#listStrategies').empty();
-			strategiesTable = $('#listStrategies').DataTable({
-				data : jsonStrategies.strategies,
-				columns : [ {
-					data : 'name'
-				} ],
-				"autoWidth" : true
-			});
+    $("#strategyDescription").fadeOut();
+    $("#createWorkflowBusiness").fadeOut();
+    $.ajax({url: getPhase3URL() + "/strategicPlan/getStrategyWithWorkflow?strategicPlanId=" + strategicPlanId}).then(
+        function (data) {
+            var jsonStrategies = JSON.parse(JSON.stringify(data));
+            if (strategiesTable != null)
+                strategiesTable.destroy();
+            $('#listStrategies').empty();
+            strategiesTable = $('#listStrategies').DataTable({
+                data: jsonStrategies.strategies,
+                columns: [{
+                    data: 'name'
+                }, {
+                    data: 'status'
+                }],
 
-			$('#listStrategies tbody').on('click','tr', function() {
-				/* Mostra l'elemento selezionato. */
-				var strategyId = strategiesTable.row(this).data()['id'];
-				var strategyDescription = strategiesTable.row(this).data()['description'];
-				$("#listStrategies .odd").css('background-color', "inherit");
-				$("#listStrategies .even").css('background-color', "inherit");
-				$(this).css('background-color', "#D6D5C3");
-				$.ajax({url: getPhase3URL() + "/strategicPlan/getStrategyWorkflowData/?strategicPlanId=" + strategicPlanId + "&strategyId=" + strategyId})
-					.then(function(data) {
-					var strategyWorkflow = JSON.parse(JSON.stringify(data));
-					idBusinessWorkflow = strategyWorkflow.workflow.businessWorkflowModelId;
-					// idProcessDefinition = strategyWorkflow.workflow.businessWorkflowProcessDefinitionId;
-					$("#strategyDescription").fadeIn();
-					$("#createWorkflowBusiness").fadeIn();
-					$('#strategyDescription').text(strategyDescription);
-				});
-			});
-		});
+                "autoWidth": true
+            });
+
+            $('#listStrategies tbody').on('click', 'tr', function () {
+                /* Mostra l'elemento selezionato. */
+                var strategyId = strategiesTable.row(this).data()['id'];
+                var strategyDescription = strategiesTable.row(this).data()['description'];
+                $("#listStrategies .odd").css('background-color', "inherit");
+                $("#listStrategies .even").css('background-color', "inherit");
+                $(this).css('background-color', "#D6D5C3");
+                $.ajax({url: getPhase3URL() + "/strategicPlan/getStrategyWorkflowData/?strategicPlanId=" + strategicPlanId + "&strategyId=" + strategyId})
+                    .then(function (data) {
+                        var strategyWorkflow = JSON.parse(JSON.stringify(data));
+                        idBusinessWorkflow = strategyWorkflow.workflow.businessWorkflowModelId;
+                        // idProcessDefinition = strategyWorkflow.workflow.businessWorkflowProcessDefinitionId;
+                        $("#strategyDescription").fadeIn();
+                        $('#strategyDescription').text(strategyDescription);
+
+                        if (strategyWorkflow.strategy.status == 2) {
+                            $("#button_create").text("Create Business workflow");
+                            $("#button_create").on("click", function () {
+                                createWorkflowBusiness(strategyId);
+                            });
+                        } else if (strategyWorkflow.strategy.status == 0) {
+                            $("#button_create").text("Modify Business workflow");
+                            $("#button_create").on("click", function () {
+                                createWorkflowBusiness(strategyId);
+                            });
+                        } else if (strategyWorkflow.strategy.status == 1) {
+                            $("#button_create").text("Visualize Business workflow");
+                        }
+
+                        $("#createWorkflowBusiness").fadeIn();
+                    });
+            });
+        });
 }
 
 function getStrategicPlans() {

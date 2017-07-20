@@ -48,7 +48,7 @@ $(document).ready(function(){
 															data : 'description'
 														},
 														{
-															data : 'organizational_Unit'
+															data : 'organizationalunit'
 														}
 														],
 												autoWidth : true,

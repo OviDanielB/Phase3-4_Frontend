@@ -25,6 +25,44 @@ function ontologyController($scope, $http) {
         metric : "metric"
     };
 
+
+    $scope.saveMeasPlan = function () {
+        var measureTasksList = [];
+
+
+
+        $scope.tasks.forEach(function (task) {
+
+            var ontology = {};
+
+            $scope.metrics.forEach(function (m) {
+                if(m.measurementModel.name === task.selected.metric){
+                    ontology = m;
+                }
+            });
+
+            measureTasksList.push({
+                taskId: task.id,
+                ontology: ontology,
+                means: task.selected.means,
+                responsible: task.selected.responsible,
+                source: task.selected.source,
+                attribute: task.selected.attribute,
+                scope: task.selected.scope,
+                time: task.selected.time
+            });
+        });
+
+        var toSend = {
+            businessWorkflowModelId: modelId,
+            measureTasksList: measureTasksList
+        };
+
+        console.log(toSend)
+        $http.post(getPhase3URL()+"/measurement-plan", toSend);
+    };
+    
+
     $http.get(getPhase3URL()+ "/ontologies").then(function (response) {
 
         $scope.ontology= response.data;
@@ -69,5 +107,6 @@ function ontologyController($scope, $http) {
             $scope.tasks.push(task);
         })
     },errorCallback);
+    
 
 }

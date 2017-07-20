@@ -20,8 +20,8 @@ var myWindow;
 function doRedirect() {
 	// Genera il link alla pagina che si desidera raggiungere
 	// myWindow.close();
-	location.href = getFrontbasePath() + '/models/deploy.html?modelId=' + idBusinessWorkflow;
-    myWindow.location.href = getPhase3URL() + "/activiti/activitiExplorerModeler/"
+    myWindowlocation.href = getFrontbasePath() + '/models/deploy.html?modelId=' + idBusinessWorkflow;
+    location.href = getPhase3URL() + "/activiti/activitiExplorerModeler/"
 			+ idBusinessWorkflow;
 }
 
@@ -37,69 +37,47 @@ function createWorkflowBusiness() {
 
 function goToPopulateBusinessWorkflow() {
 
-	var processDefinitionId;
-    $.ajax({
-            url: getPhase3URL() + "/strategicPlan/getStrategyWorkflowRelationOfStrategicPlan?id=" + getURLParameter("id"),
+    var keyName = getURLParameter('name');
+
+    if (keyName == null) {
+        document.getElementById('errorPanelDiv').innerHTML = "The MetaworkflowName is null!";
+        document.getElementById("errorDiv").style.display = "block";
+    } else {
+        $.ajax({
+            url: getPhase3URL() + "/activiti/instances?processDefinitionKey=" + keyName,
+            type: "GET",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
+
             success: function (response, textStatus, xhr) {
                 console.log(response);
                 var res = JSON.parse(JSON.stringify(response));
-
-                // for each workflowData associated with a strategicPlan
-                $.each(res.strategyWorkflowRelationList, function (i, item) {
-
-                    if (item.strategy.id == strategyId) {
-                        var keyName = item.workflow.metaWorkflowName;
-                        console.log(keyName);
-
-
-                        $.ajax({
-
-                            // retrieve processed definition key associated with a metaworflow
-                            url: getPhase3URL() + "/activiti/instances?processDefinitionKey=" + keyName,
-                            type: "GET",
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-
-                            success: function (response, textStatus, xhr) {
-                                console.log(response);
-                                var res = JSON.parse(JSON.stringify(response));
-                                processDefinitionId = res.processDefinitionId;
-                                console.log(processDefinitionId);
-                                $.ajax({
-                                    type: "POST",
-                                    url: getPhase3URL() + "/workflows/complete-task?processDefinitionId=" + processDefinitionId,
-                                    contentType: "application/json; charset=utf-8",
-                                    dataType: "json",
-                                    success: function (response) {
-                                        console.log(response);
-                                        document.getElementById('successPanelDiv').innerHTML = response.businessWorkflowProcessInstanceId;
-                                        document.getElementById("successDiv").style.display = "block";
-
-                                    },
-                                    error: function (err) {
-                                        var json_obj = $.parseJSON(err.responseText);
-                                        if (!json_obj.errorCode || !json_obj.message) {
-                                            document.getElementById('errorPanelDiv').innerHTML = "Expired timeout interval";
-                                        } else {
-                                            document.getElementById('errorPanelDiv').innerHTML = json_obj.errorCode
-                                                + json_obj.message;
-                                        }
-                                        document.getElementById("errorDiv").style.display = "block";
-
-                                    }
-                                });
-                            }
-                        });
+                processDefinitionId = res.processDefinitionId;
+                console.log(processDefinitionId);
+                $.ajax({
+                    type: "POST",
+                    url: getPhase3URL() + "/workflows/complete-task?processDefinitionId=" + processDefinitionId,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                        document.getElementById('successPanelDiv').innerHTML = response.businessWorkflowProcessInstanceId;
+                        document.getElementById("successDiv").style.display = "block";
+                    },
+                    error: function (err) {
+                        var json_obj = $.parseJSON(err.responseText);
+                        if (!json_obj.errorCode || !json_obj.message) {
+                            document.getElementById('errorPanelDiv').innerHTML = "Expired timeout interval";
+                        } else {
+                            document.getElementById('errorPanelDiv').innerHTML = json_obj.errorCode
+                                + json_obj.message;
+                        }
+                        document.getElementById("errorDiv").style.display = "block";
                     }
                 });
-            },
-            error: function (err, xhr) {
-                console.log(err.responseText);
             }
-        }
-    );
+        });
+    }
 }
 
 function getStrategies(strategicPlanId) {

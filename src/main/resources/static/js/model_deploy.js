@@ -90,6 +90,7 @@ function checkIfDeployed(modelId) {
 	
 }
 
+// TODO add onclick action for button at the end of metaworkflow
 function exportWorkflow() {
 	var modelId = getURLParameter('modelId');
 

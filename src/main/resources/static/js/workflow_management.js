@@ -53,10 +53,9 @@ $(document)
 
                                 });
                         $('#strategies tbody').on('click', 'button', function () {
-
-                            var clickedstrategy = table.row($(this).parents('tr')).data();
-//														      alert(clickedstrategy.name);
-                            getWorkflowName(clickedstrategy.name, clickedstrategy.id);
+                            var row = table.row($(this).parents('tr'));
+                            var clickedstrategy = row.data();
+                            getWorkflowName(clickedstrategy.name, clickedstrategy.id, clickedstrategy.status);
                         });
 
 
@@ -74,7 +73,7 @@ function urlParam(name) {
     }
 }
 
-function getWorkflowName(strategyName, strategyid) {
+function getWorkflowName(strategyName, strategyid, status) {
 
     var statesdemo = {
         state0: {
@@ -106,7 +105,8 @@ function getWorkflowName(strategyName, strategyid) {
                     var wfdata = {
                         strategyId: strategyid,
                         strategcPlanId: id,
-                        name: f.name
+                        name: f.name,
+                        updatedStrategy: status
                     };
                     console.log(wfdata);
                     $.ajax({

@@ -1,8 +1,13 @@
 var strategiesTable;
 
-var jsonWorkflowBusiness;
 var jsonData;
 var idBusinessWorkflow;
+
+var status = {
+    MODIFIED : 0,
+    NOTMODIFIED : 1,
+    NEW : 2
+};
 
 $(document).ready(function() {
 	checkSystemState();
@@ -81,40 +86,58 @@ function goToPopulateBusinessWorkflow() {
 }
 
 function getStrategies(strategicPlanId) {
-	$("#strategyDescription").fadeOut();
-	$("#createWorkflowBusiness").fadeOut();
-	$.ajax({url : getPhase3URL() + "/strategicPlan/getStrategyWithWorkflow?strategicPlanId=" + strategicPlanId}).then(
-		function(data) {
-			var jsonStrategies = JSON.parse(JSON.stringify(data));
-			if (strategiesTable != null)
-				strategiesTable.destroy();
-			$('#listStrategies').empty();
-			strategiesTable = $('#listStrategies').DataTable({
-				data : jsonStrategies.strategies,
-				columns : [ {
-					data : 'name'
-				} ],
-				"autoWidth" : true
-			});
+    $("#strategyDescription").fadeOut();
+    $("#createWorkflowBusiness").fadeOut();
+    $.ajax({url: getPhase3URL() + "/strategicPlan/getStrategyWithWorkflow?strategicPlanId=" + strategicPlanId}).then(
+        function (data) {
+            var jsonStrategies = JSON.parse(JSON.stringify(data));
+            if (strategiesTable != null)
+                strategiesTable.destroy();
+            $('#listStrategies').empty();
+            strategiesTable = $('#listStrategies').DataTable({
+                data: jsonStrategies.strategies,
+                columns: [{
+                    data: 'name'
+                }, {
+                    data: 'status'
+                }],
 
-			$('#listStrategies tbody').on('click','tr', function() {
-				/* Mostra l'elemento selezionato. */
-				var strategyId = strategiesTable.row(this).data()['id'];
-				var strategyDescription = strategiesTable.row(this).data()['description'];
-				$("#listStrategies .odd").css('background-color', "inherit");
-				$("#listStrategies .even").css('background-color', "inherit");
-				$(this).css('background-color', "#D6D5C3");
-				$.ajax({url: getPhase3URL() + "/strategicPlan/getStrategyWorkflowData/?strategicPlanId=" + strategicPlanId + "&strategyId=" + strategyId})
-					.then(function(data) {
-					var strategyWorkflow = JSON.parse(JSON.stringify(data));
-					idBusinessWorkflow = strategyWorkflow.workflow.businessWorkflowModelId;
-					console.log(strategyWorkflow.workflow);
-					$("#strategyDescription").fadeIn();
-					$("#createWorkflowBusiness").fadeIn();
-					$('#strategyDescription').text(strategyDescription);
-				});
-			});
-		});
+                "autoWidth": true
+            });
+
+            $('#listStrategies tbody').on('click', 'tr', function () {
+                /* Mostra l'elemento selezionato. */
+                var strategyId = strategiesTable.row(this).data()['id'];
+                var strategyDescription = strategiesTable.row(this).data()['description'];
+                $("#listStrategies .odd").css('background-color', "inherit");
+                $("#listStrategies .even").css('background-color', "inherit");
+                $(this).css('background-color', "#D6D5C3");
+                $.ajax({url: getPhase3URL() + "/strategicPlan/getStrategyWorkflowData/?strategicPlanId=" + strategicPlanId + "&strategyId=" + strategyId})
+                    .then(function (data) {
+                        var strategyWorkflow = JSON.parse(JSON.stringify(data));
+                        idBusinessWorkflow = strategyWorkflow.workflow.businessWorkflowModelId;
+                        // idProcessDefinition = strategyWorkflow.workflow.businessWorkflowProcessDefinitionId;
+                        $("#strategyDescription").fadeIn();
+                        $('#strategyDescription').text(strategyDescription);
+
+                        if (strategyWorkflow.strategy.status == 2) {
+                            $("#button_create").text("Create Business workflow");
+                            $("#button_create").on("click", function () {
+                                createWorkflowBusiness(strategyId);
+                            });
+                        } else if (strategyWorkflow.strategy.status == 0) {
+                            $("#button_create").text("Modify Business workflow");
+                            $("#button_create").on("click", function () {
+                                createWorkflowBusiness(strategyId);
+                            });
+                        } else if (strategyWorkflow.strategy.status == 1) {
+                            $("#button_create").text("Visualize Business workflow");
+                        }
+
+                        $("#createWorkflowBusiness").fadeIn();
+                    });
+            });
+        });
 }
 
 function getStrategicPlans() {

@@ -16,7 +16,8 @@ $(document).ready(function () {
                 {data: 'name'},
                 {data: 'description'},
                 {data: 'version'},
-                {data: 'release'}
+                {data: 'release'},
+                {data: 'status'}
             ]
             , "autoWidth": true
 

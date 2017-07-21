@@ -20,13 +20,14 @@ var myWindow;
 function doRedirect() {
 	// Genera il link alla pagina che si desidera raggiungere
 	// myWindow.close();
-    myWindow.location.href = getFrontbasePath() + '/models/deploy.html?modelId=' + idBusinessWorkflow;
+    myWindow.location.href = getFrontbasePath() + '/models/deploy.html?modelId=' + idBusinessWorkflow
+		+ "&name=" + getURLParameter('name');
     location.href = getPhase3URL() + "/activiti/activitiExplorerModeler/"
 			+ idBusinessWorkflow;
 }
 
 // populate business workflow
-function createWorkflowBusiness() {
+function createWorkflowBusiness(strategyId) {
 
     goToPopulateBusinessWorkflow();
 
@@ -116,19 +117,18 @@ function getStrategies(strategicPlanId) {
                     .then(function (data) {
                         var strategyWorkflow = JSON.parse(JSON.stringify(data));
                         idBusinessWorkflow = strategyWorkflow.workflow.businessWorkflowModelId;
-                        // idProcessDefinition = strategyWorkflow.workflow.businessWorkflowProcessDefinitionId;
                         $("#strategyDescription").fadeIn();
                         $('#strategyDescription').text(strategyDescription);
 
                         if (strategyWorkflow.strategy.status == 2) {
                             $("#button_create").text("Create Business workflow");
                             $("#button_create").on("click", function () {
-                                createWorkflowBusiness(strategyId);
+                                createWorkflowBusiness();
                             });
                         } else if (strategyWorkflow.strategy.status == 0) {
                             $("#button_create").text("Modify Business workflow");
                             $("#button_create").on("click", function () {
-                                createWorkflowBusiness(strategyId);
+                                createWorkflowBusiness();
                             });
                         } else if (strategyWorkflow.strategy.status == 1) {
                             $("#button_create").text("Visualize Business workflow");

@@ -69,7 +69,6 @@ function collectMeasure() {
 	collected_data.value = $('#value').val();
 	collected_data.validated = false;
 
-	
 	$.ajax({
 		url : getPhase4URL() + '/measurement-collection?runtimeTaskId='+runtimeTaskId,
 		type : 'post',
@@ -83,4 +82,27 @@ function collectMeasure() {
 			$('#result').find('p').html('<br><b>'+error.errorCode + " - "+error.message+'</b>').css('color','#DF0101');
 		}
 	});
+}
+
+//There is a problem with the Metric definition, so the data collection cannot proceed
+function sendIssue() {
+
+    var payload = {
+        "taskId" : taskId,
+        "messageType" : $("#messageType")[0].value,
+        "messageContent" : $("#messageContent")[0].value
+    };
+    console.log(payload);
+    $.ajax({
+        url: getPhase4URL() + "/bus/issueMessages?instance=" + runtimeTaskId,
+        type: "POST",
+		data: JSON.stringify(payload),
+        contentType : "application/json; charset=utf-8",
+		success : function (response) {
+        	console.log("Messaggio inviato correttamente");
+        },
+        error : function (response) {
+        	console.log(response);
+        }
+    })
 }

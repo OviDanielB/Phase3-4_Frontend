@@ -6,7 +6,7 @@ $(document).ready(function() {
 function populateIssueMessagesView() {
 	$.ajax({
 		type : "GET",
-		url : getPhase4URL() + "/bus/issueMessages",
+		url : getPhase3URL() + "/bus/issueMessages",
 		contentType : "application/json; charset=utf-8",
 		dataType : "json",
 		success : function(response, textStatus, xhr) {
@@ -18,8 +18,12 @@ function populateIssueMessagesView() {
 				var tr = $('<tr/>').appendTo(tbody);
 				tr.append('<td>' + item.businessWorkflowName + '</td>');
 				tr.append('<td>' + item.businessWorkflowInstanceId + '</td>');
-				tr.append('<td>' + item.issueMessage + '</td>');
+				tr.append('<td>' + item.messageType + '</td>');
+				tr.append('<td>' + item.messageContent + '</td>');
 				tr.append('<td>' + item.issueMessageResources + '</td>');
+				tr.append('<td><button class="btn btn-lg" ' +
+					'onclick="javascript:confirmIssue(' + item.businessWorkflowInstanceId + ',' + item.messageType +
+					')">Confirm Issue</button></td>');
 				tr.append(this.innerHTML);
 			});
 
@@ -29,4 +33,23 @@ function populateIssueMessagesView() {
 
 		}
 	});
+}
+
+function confirmIssue(businessWorkflowInstanceId, messageType) {
+	var issueMessage = {
+		"businessWorkflowProcessInstanceId" : businessWorkflowInstanceId,
+		"messageType" : messageType
+	};
+	$.ajax({
+		url: getPhase3URL() + "/BusinessIssueMessage",
+		type: "POST",
+		data: data,
+		success : function (response) {
+			console.log("Issue confermata");
+        },
+		error : function (response) {
+			console.log(response);
+        }
+
+	})
 }

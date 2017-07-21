@@ -90,6 +90,35 @@
 
                        	<div class="row">
                         	<div class="col-md-11">
+                                <button id="issueButton" class="btn btn-default btn-lg" data-toggle="modal" data-target="#issueModal">Notify an issue</button>
+
+                                <div class="modal fade" id="issueModal" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">Notify an Issue</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>
+                                                <form id="issueForm">
+                                                    <label for="messageType">Tipo di errore</label>
+                                                    <select class="form-control" id="messageType" disabled>
+                                                        <option value="measurementIssue" >Errore nel Measurement Plan</option>
+                                                    </select>
+                                                    <br>
+                                                    <label for="messageContent">Commento </label>
+                                                    <textarea class="form-control" id="messageContent"></textarea>
+                                                </form>
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" id="#sendIssueMessage" class="btn btn-primary" onclick="javascript:sendIssue()">Send Issue Message</button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
                         	</div>
                         	<div class="col-md-1">
                         		<br>

@@ -15,7 +15,7 @@ var myWindow;
 function doRedirect() {
 	// Genera il link alla pagina che si desidera raggiungere
 	// myWindow.close();
-    myWindowlocation.href = getFrontbasePath() + '/models/deploy.html?modelId=' + idBusinessWorkflow;
+    myWindow.location.href = getFrontbasePath() + '/models/deploy.html?modelId=' + idBusinessWorkflow;
     location.href = getPhase3URL() + "/activiti/activitiExplorerModeler/"
 			+ idBusinessWorkflow;
 }
@@ -35,11 +35,11 @@ function goToPopulateBusinessWorkflow() {
     var keyName = getURLParameter('name');
 
     if (keyName == null) {
-        document.getElementById('errorPanelDiv').innerHTML = "The MetaworkflowName is null!";
+        document.getElementById('errorPanelDiv').innerHTML = "The workflowName is null!";
         document.getElementById("errorDiv").style.display = "block";
     } else {
         $.ajax({
-            url: getPhase3URL() + "/activiti/instances?processDefinitionKey=" + keyName,
+            url: getPhase3URL() + "/activiti/instances?processDefinitionKey=" + keyName + "_workflow_handler",
             type: "GET",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -51,8 +51,13 @@ function goToPopulateBusinessWorkflow() {
                 console.log(processDefinitionId);
                 $.ajax({
                     type: "POST",
-                    url: getPhase3URL() + "/workflows/complete-task?processDefinitionId=" + processDefinitionId,
+                    url: getPhase3URL() + "/workflows/complete-task",
                     contentType: "application/json; charset=utf-8",
+                    data : JSON.stringify({
+                        'processDefinitionId' : processDefinitionId,
+						// word contained only in the name of the task to complete
+						'taskToComplete': "construction"
+                    }),
                     dataType: "json",
                     success: function (response) {
                         console.log(response);

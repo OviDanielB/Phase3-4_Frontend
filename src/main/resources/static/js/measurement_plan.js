@@ -1,6 +1,9 @@
 $(document).ready(function() {
 
 	checkSystemState();
+
+	goToPlanMeasureTasks();
+
 	var name = getURLParameter('name');
 	var modelId = getURLParameter('modelId');
 	$(".page-title-name").append(name);
@@ -50,7 +53,6 @@ function getMetricAndTasks(modelId){
 				
 			 	var newRow = $('#default').clone().attr('id', 'row'+val.id);			
 				$('#attach_metric_row').append(newRow);
-
 
 				//Fill metrics
 				addMetrics(response.metrics, val.id);
@@ -250,4 +252,45 @@ function editTasks(){
 		//$('#metric'+id_task+'option:contains('+metric+')').prop('selected', true);
 
 	});
+}
+
+function goToPlanMeasureTasks() {
+
+    var keyName = getURLParameter('name');
+
+    if (keyName == null) {
+        document.getElementById('errorPanelDiv').innerHTML = "The workflowName is null!";
+        document.getElementById("errorDiv").style.display = "block";
+    } else {
+        $.ajax({
+            url: getPhase3URL() + "/activiti/instances?processDefinitionKey=" + keyName + "_workflow_handler",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+
+            success: function (response, textStatus, xhr) {
+                console.log(response);
+                var res = JSON.parse(JSON.stringify(response));
+                processDefinitionId = res.processDefinitionId;
+                console.log(processDefinitionId);
+                $.ajax({
+                    type: "POST",
+                    url: getPhase3URL() + "/workflows/complete-task",
+                    contentType: "application/json; charset=utf-8",
+                    data : JSON.stringify({
+                        'processDefinitionId' : processDefinitionId,
+                        // word contained only in the name of the task to complete
+                        'taskToComplete': "Deploy"
+                    }),
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+    }
 }

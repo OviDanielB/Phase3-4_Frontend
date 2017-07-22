@@ -16,10 +16,10 @@
 	href="css/theme-default.css" />
 <!-- EOF CSS INCLUDE -->
 </head>
-<body>
+<body ng-app="validateModule">
 
 	<!-- START PAGE CONTAINER -->
-	<div class="page-container page-navigation-top">
+	<div class="page-container page-navigation-top" ng-controller="validateController">
 
 		<!-- PAGE CONTENT -->
 		<div class="page-content">
@@ -51,17 +51,57 @@
 				<!-- START CONTENT FRAME BODY -->
 				<div class="content-frame-body">
 					<div class="row">
-						<div class="col-md-3"></div>
-						<div class="col-md-6">
+						<!-- <div class="col-md-3"></div> -->
+						<div><!-- class="col-md-6"> -->
 							<div class="panel panel-default">
 								<div class="panel-body">
 									<h4 align="center">Validation Description</h4>
-									<p id="validationDescription"></p>
+									<!-- <p id="validationDescription"></p> -->
+									<table class="table">
+										<tr>
+											<th>Name</th>
+											<th>Type</th>
+											<th>Description</th>
+											<th>Cardinality</th>
+											<th>Comparison Type</th>
+											<th>Measure Task Id</th>
+											<th>Countermeasure</th>
+											<th>Countermeasure Done</th>
+										</tr>
+										<tr>
+											<td>{{validOp.name}}</td>
+											<td>{{validOp.type}}</td>
+											<td>{{validOp.description}}</td>
+											<td>{{validOp.cardinality}}</td>
+											<td>{{validOp.compType}}</td>
+											<td>{{validOp.measureTaskId}}</td>
+											<td>{{validOp.countermeasures}}</td>
+											<td>{{validOp.contromeasureDone}}</td>
+										</tr>
+									</table>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-3"></div>
 					</div>
+
+					<table class="table">
+						<tr>
+							<th>Value</th>
+							<th>Time Taken</th>
+							<th>Validated</th>
+						</tr>
+						<tr ng-repeat="collected in collectedData">
+							<td>
+								<input id="measurementValue" value="{{collected.value}}" disabled>
+							</td>
+							<td>
+								<input value="{{collected.date}}" disabled>
+							</td>
+							<td>
+								<input value="{{collected.validated}}" disabled>
+							</td>
+						</tr>
+					</table>
 
 					<div class="form-group">
 						<div class="row">
@@ -96,7 +136,7 @@
 							<div class="col-md-3"></div>
 							<div class="col-md-6">
 								<button class="btn btn-success btn-block btn-lg"
-									id="buttonSuccess">Success</button>
+									id="buttonSuccess" ng-click="completeValidation()">Success</button>
 							</div>
 							<div class="col-md-3"></div>
 						</div>
@@ -230,6 +270,8 @@
 	<script type="text/javascript"
 		src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
 	<script type="text/javascript" src="js/webapp_config.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 	<!-- END THIS PAGE PLUGINS-->
 
 	<!-- START TEMPLATE -->
@@ -241,6 +283,8 @@
 	<script type="text/javascript" src="js/utils.js"></script>
 	<!--         <script type="text/javascript" src="js/measurement-collection.js"></script> -->
 	<script type="text/javascript" src="js/validate.js"></script>
+
+	<script type="text/javascript" src="js/angular/validateModule.js"></script>
 
 
 

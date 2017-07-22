@@ -4,7 +4,7 @@ $(document).ready(function() {
 	checkSystemState();
 	
 	var name = getURLParameter('name');
-	$(".page-title-name").append(name);
+	//$(".page-title-name").append(name);
 	
 	taskId = getURLParameter('taskId');
 	runtimeTaskId = getURLParameter('runtimeTaskId');

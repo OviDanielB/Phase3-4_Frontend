@@ -49,7 +49,8 @@ function ontologyController($scope, $http) {
                 source: task.selected.source,
                 attribute: task.selected.attribute,
                 scope: task.selected.scope,
-                time: task.selected.time
+                time: task.selected.time,
+                newVersion: true
             });
         });
 
@@ -58,7 +59,7 @@ function ontologyController($scope, $http) {
             measureTasksList: measureTasksList
         };
 
-        console.log(toSend)
+        console.log(toSend);
         $http.post(getPhase3URL()+"/measurement-plan", toSend);
     };
     

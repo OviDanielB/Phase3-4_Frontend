@@ -43,13 +43,14 @@ $( document ).ready(function() {
 function saveValidation(taskId) {
 	
 	$.ajax({
-		'url' : getPhase4URL() + "validation/completeValidation?taskId="
+		'url' : getPhase4URL() + "validation/saveCollectedDataOnBus?taskId="
 				+ taskId,
 		'type' : 'get',
 		'contentType' : "application/json; charset=utf-8",
 		'dataType' : "json",
 		
 		success : function(response) {
+			console.log(response);
 			window.location.href = getUrlFrontEnd();
 		},
 		error : function(response) {

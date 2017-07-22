@@ -38,7 +38,7 @@ function getMeasureTaskAndCollectedData(taskId, collectedDataId) {
 		success : function(response) {
 
 			collectedData = response.collectedData;
-			$('#error_message').find('p').append(errorMessage+". Value added previously is "+collectedData.value);
+			$('#error_message').find('p').append(errorMessage);  //+". Value added previously is "+collectedData.value);
 
 			$('#means').val(response.measureTask.means);
 			$('#source').val(response.measureTask.source);

@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	checkSystemState();
-	runtimeTaskId = getURLParameter("runtimeTaskId");
+	var runtimeTaskId = getURLParameter("runtimeTaskId");
 	taskId = getURLParameter("taskId");
-	validationId = getURLParameter("validationId");
+	var validationId = getURLParameter("validationId");
 	
 	setValidationDetails();
 	
@@ -11,8 +11,25 @@ $(document).ready(function() {
 	});
 	
 	$('#buttonSuccess').on("click", function() {
-		window.location.href = getUrlFrontEnd() +"/execute-validation.html?runtimeTaskId=" +
-		runtimeTaskId + "&taskId="+ taskId;
+/*        $.ajax({
+            'url' : getPhase4URL() + "validation/completeValidation?taskId="
+            + taskId + "&validationOpId=" + getURLParameter("validationId"),
+            'type' : 'get',
+            'contentType' : "application/json; charset=utf-8",
+            'dataType' : "json",
+
+            success : function(response) {
+                //window.location.href = getUrlFrontEnd();
+				/!* go to remaining validation op list *!/
+                window.location.href = getUrlFrontEnd() +"/execute-validation.html?runtimeTaskId=" +
+                    runtimeTaskId + "&taskId="+ taskId;
+            },
+            error : function(response) {
+                alert(response.errorCode + " " + response.message);
+            }
+        });*/
+
+
 	});
 	
 	$('#buttonRepeateMeasure').on("click", function() {
@@ -68,7 +85,7 @@ function ignoreValidation(validationId){
 function setValidationDetails() {
 	$.ajax({
 		'url' : getPhase4URL() + "/validation/validationOp?id="
-				+ validationId,
+				+ getURLParameter("validationId"),
 		'type' : 'get',
 		'contentType' : "application/json; charset=utf-8",
 		'dataType' : "json",
@@ -95,7 +112,7 @@ function setValidationDetails() {
 function executeValidation(validationId) {
 	$.ajax({
 		'url' :getPhase4URL() + "/validation/validateData?id="
-				+ validationId,
+				+ getURLParameter("validationId"),
 		'type' : 'get',
 		'contentType' : "application/json; charset=utf-8",
 		'dataType' : "json",
@@ -167,7 +184,7 @@ function repeateMeasure(runtimeTaskId, validationId) {
 
 	$.ajax({
 		'url' : getPhase4URL() + "/validation/repeateMeasure?idRuntimeTask="
-				+ runtimeTaskId +"&idValidationOp="+ validationId + "&errorMessage=" + errorMessage,
+				+ runtimeTaskId +"&idValidationOp="+ validationId + "&errorMessage=" + errorMessage +"&taskId=" +taskId,
 		'type' : 'get',
 		'contentType' : "application/json; charset=utf-8",
 		'dataType' : "json",

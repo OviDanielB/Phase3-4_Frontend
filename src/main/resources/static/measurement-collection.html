@@ -15,10 +15,10 @@
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
         <!-- EOF CSS INCLUDE -->
     </head>
-    <body>
+    <body ng-app="measurementCollectionModule">
 
         <!-- START PAGE CONTAINER -->
-        <div class="page-container page-navigation-top">
+        <div class="page-container page-navigation-top"  ng-controller="measurementCollectionController">
 
             <!-- PAGE CONTENT -->
             <div class="page-content">
@@ -45,12 +45,122 @@
                     <div class="content-frame-top">
                         <div class="page-title">
                             <h2>Measurement Collection </h2>
-                            <h2 class="page-title-name">&nbsp-&nbsp</h2>
+                            <h2 class="page-title-name">&nbsp-&nbsp {{name}}</h2>
                         </div>
                     </div>
 
                     <!-- START CONTENT FRAME BODY -->
-                    <div class="content-frame-body">
+                    <div class="content-frame-body" >
+
+                        <br>
+                        <br>
+                        <h3>Measure Task Recap</h3>
+
+                        <br>
+                        <br>
+
+                        <table class="table">
+                            <tr>
+                                <th>Task</th>
+                                <th>Metric</th>
+                                <th>Attribute (What?)</th>
+                                <th>Scope (Where?)</th>
+                                <th>Time / Event (When?)</th>
+                                <th>Source (From Where?)</th>
+                                <th>Responsible (Who?)</th>
+                                <th>Means (How?)</th>
+                            </tr>
+
+                            <tr>
+                                <td>{{task.taskId}}</td>
+                                <td>
+                                    <select name="metric" id="metricSelect" >
+                                        <option value="" selected disabled>{{task.ontology.measurementModel.name}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="attribute" id="attributeSelect">
+                                        <option  value="" disabled selected>{{task.attribute}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" name="scope" value="{{task.scope}}" disabled>
+                                </td>
+                                <td>
+                                    <input type="text" name="time" value="{{task.time}}" disabled>
+                                </td>
+                                <td>
+                                    <input type="text" name="source" value="{{task.source}}" disabled>
+                                </td>
+                                <td>
+                                    <select name="group" id="groupSelect" >
+                                        <option value="" disabled selected>{{task.responsible}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="means" id="meansSelect" >
+                                        <option value="">{{task.means}}</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                        <br>
+                        <br>
+                        <div class="row">
+                            <h3>Insert Collected Data</h3>
+                            <button ng-click="updateData()">Refresh</button>
+                        </div>
+
+                        <table class="table">
+                            <tr>
+                                <th>Value</th>
+                                <th>Measure Unit</th>
+                                <th>Time Taken</th>
+                                <th>Validated</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input ng-model="currentCollected.value" placeholder="Enter New Value.." >
+                                </td>
+                                <td>
+                                    <input value="{{task.ontology.unit.name}}" disabled>
+                                </td>
+                                <td>
+                                    <input value="Now" disabled>
+                                </td>
+                                <td>
+                                    <input value="false" disabled>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="collected in collectedData">
+                                <td>
+                                    <input id="measurementValue" value="{{collected.value}}" disabled>
+                                </td>
+                                <td>
+                                    <input value="{{task.ontology.unit.name}}" disabled>
+                                </td>
+                                <td>
+                                    <input value="{{collected.date}}" disabled>
+                                </td>
+                                <td>
+                                    <input value="{{collected.validated}}" disabled>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <button value="Collect Data" ng-click="collectAndSaveMeasurement()">Collect New Data</button>
+
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+
+
+                        <!-- OLD
 
                     	<div class="row">
                     		<div class="col-md-6">
@@ -97,7 +207,7 @@
                         	</div>
                         </div>
 
-                    </div>
+                    </div>          -->
                     <!-- END CONTENT FRAME BODY -->
 
                 </div>
@@ -141,6 +251,8 @@
         <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
         <script type="text/javascript" src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
         <!-- END THIS PAGE PLUGINS-->
 
         <!-- START TEMPLATE -->
@@ -151,6 +263,8 @@
         <script type="text/javascript" src="js/manage_cookie.js"></script>
         
         <script type="text/javascript" src="js/measurement_collection.js"></script>
+
+        <script type="text/javascript" src="js/angular/measurementCollectionModule.js"></script>
 
 
 

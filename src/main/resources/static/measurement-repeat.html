@@ -15,11 +15,11 @@
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
         <!-- EOF CSS INCLUDE -->
     </head>
-    <body>
+    <body ng-app="measurementCollectionModule">
 
 
         <!-- START PAGE CONTAINER -->
-        <div class="page-container page-navigation-top">
+        <div class="page-container page-navigation-top" >
 
             <!-- PAGE CONTENT -->
             <div class="page-content">
@@ -45,20 +45,117 @@
                     <!-- START CONTENT FRAME TOP -->
                     <div class="content-frame-top">
                         <div class="page-title">
-                            <h2>Measurement Repeat </h2>
+                            <h2>Measurement Repeat</h2>
                             <h2 class="page-title-name">&nbsp;-&nbsp;</h2>
                         </div>
                     </div>
 
                     <!-- START CONTENT FRAME BODY -->
-                    <div class="content-frame-body">
+                    <div class="content-frame-body" ng-controller="measurementCollectionController">
          				<div class="row">
          					<div class="alert alert-danger" role="alert" id="error_message">
                                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                 <p><strong>Measure invalid!</strong>&nbsp;</p>
                             </div>
          				</div>
-         				<br>
+
+
+                        <br>
+                        <br>
+                        <h3>Measure Task Recap</h3>
+
+                        <br>
+                        <br>
+
+                        <table class="table" >
+                            <tr>
+                                <th>Task</th>
+                                <th>Metric</th>
+                                <th>Attribute (What?)</th>
+                                <th>Scope (Where?)</th>
+                                <th>Time / Event (When?)</th>
+                                <th>Source (From Where?)</th>
+                                <th>Responsible (Who?)</th>
+                                <th>Means (How?)</th>
+                            </tr>
+
+                            <tr>
+                                <td>{{task.taskId}}</td>
+                                <td>
+                                    <select name="metric" id="metricSelect" >
+                                        <option value="" selected disabled>{{task.ontology.measurementModel.name}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="attribute" id="attributeSelect">
+                                        <option  value="" disabled selected>{{task.attribute}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" name="scope" value="{{task.scope}}" disabled>
+                                </td>
+                                <td>
+                                    <input type="text" name="time" value="{{task.time}}" disabled>
+                                </td>
+                                <td>
+                                    <input type="text" name="source" value="{{task.source}}" disabled>
+                                </td>
+                                <td>
+                                    <select name="group" id="groupSelect" >
+                                        <option value="" disabled selected>{{task.responsible}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="means" id="meansSelect" >
+                                        <option value="">{{task.means}}</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                        <br>
+                        <br>
+                        <h3>Previously Collected Data</h3>
+                        <h5>Insert new value and click on related 'Repeat Measure' to update the measurement value!</h5>
+                        <br>
+                        <br>
+
+                        <table class="table">
+                            <tr>
+                                <th>Old Value</th>
+                                <th>New Value</th>
+                                <th>Measure Unit</th>
+                                <th>Time Taken</th>
+                                <th>Validated</th>
+                                <th></th>
+                            </tr>
+
+                            <tr ng-repeat="collected in collectedData">
+                                <td>
+                                    <input id="measurementValue" value="{{collected.value}}" >
+                                </td>
+                                <td>
+                                    <input id="measurementValueRepeat" value="" ng-model="collected.newValue">
+                                </td>
+                                <td>
+                                    <input value="{{task.ontology.unit.name}}" disabled>
+                                </td>
+                                <td>
+                                    <input value="{{collected.date}}" disabled>
+                                </td>
+                                <td>
+                                    <input value="{{collected.validated}}" disabled>
+                                </td>
+                                <td>
+                                    <button ng-click="collectAndSaveMeasurement(collected)">Repeat Measure</button>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                    <!-- OLD
+                        <br>
          				<div class="row">
          					<div class="row">
                     		<div class="col-md-6">
@@ -105,7 +202,7 @@
                         	</div>
                         </div>
 
-                    </div>
+                    </div>   -->
                     <!-- END CONTENT FRAME BODY -->
 
                 </div>
@@ -150,6 +247,8 @@
         <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
         <script type="text/javascript" src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
         <!-- END THIS PAGE PLUGINS-->
 
         <!-- START TEMPLATE -->
@@ -161,11 +260,8 @@
         <script type="text/javascript" src="js/demo_tasks.js"></script>
 
         <script type="text/javascript" src="js/measurement_repeat.js"></script>
-        
 
-
-
-
+        <script type="text/javascript" src="js/angular/measurementCollectionModule.js"></script>
 
         <!-- END TEMPLATE -->
     <!-- END SCRIPTS -->

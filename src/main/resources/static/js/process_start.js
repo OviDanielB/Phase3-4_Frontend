@@ -2,6 +2,9 @@ $(document)
 		.ready(
 				function() {
 					checkSystemState();
+
+                    goToStartBusinessProcess();
+
 					var name = getURLParameter('name');
 					$(".page-title-name").append(name);
 					document.getElementById('labelProcessStart').innerHTML = name;
@@ -53,38 +56,68 @@ function StartButton() {
 }
 
 function checkIfStarted(procDefId) {
-	if (procDefId == null) {
-		document.getElementById('errorPanelDiv').innerHTML = "The processDefinitionId is null!";
-		document.getElementById("errorDiv").style.display = "block";
-	} else {
+    if (procDefId == null) {
+        document.getElementById('errorPanelDiv').innerHTML = "The processDefinitionId is null!";
+        document.getElementById("errorDiv").style.display = "block";
+    } else {
 
-		$
-				.ajax({
-					type : "GET",
-					url : getPhase3URL() + "/workflows/" + procDefId + "/process-instance",
-					contentType : "application/json; charset=utf-8",
-					dataType : "json",
-					success : function(response,textStatus, xhr) {
-						if(xhr.status == 204){
-						    //nothing to do
-							//document.getElementById('successPanelDiv').innerHTML = "The process instance is not started yet! You can start it!";
-							// document.getElementById("successDiv").style.display = "block";
-						}
-						else if(xhr.status == 200){
-							document.getElementById('checkboxProcess').disabled = true;
-							document.getElementById('errorPanelDiv').innerHTML = "The process instance  "+ response.businessWorkflowProcessInstanceId +" was already started!";
-							document.getElementById("errorDiv").style.display = "block";
-						}
+        $
+            .ajax({
+                type: "GET",
+                url: getPhase3URL() + "/workflows/" + procDefId + "/process-instance",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response, textStatus, xhr) {
+                    if (xhr.status == 204) {
+                        //nothing to do
+                        //document.getElementById('successPanelDiv').innerHTML = "The process instance is not started yet! You can start it!";
+                        // document.getElementById("successDiv").style.display = "block";
+                    }
+                    else if (xhr.status == 200) {
+                        document.getElementById('checkboxProcess').disabled = true;
+                        document.getElementById('errorPanelDiv').innerHTML = "The process instance  " + response.businessWorkflowProcessInstanceId + " was already started!";
+                        document.getElementById("errorDiv").style.display = "block";
+                    }
 
-					},
-					error : function(err,xhr) {
-						if(xhr.status == 204){
-							document.getElementById('successPanelDiv').innerHTML = "The process instance is not started yet! You can start it!";
-							document.getElementById("successDiv").style.display = "block";
-							}
+                },
+                error: function (err, xhr) {
+                    if (xhr.status == 204) {
+                        document.getElementById('successPanelDiv').innerHTML = "The process instance is not started yet! You can start it!";
+                        document.getElementById("successDiv").style.display = "block";
+                    }
 
-					}
-				});
-	}
-	
+                }
+            });
+    }
+
+}
+
+function goToStartBusinessProcess() {
+
+    var keyName = getURLParameter('name');
+    var processDefinitionId = getURLParameter('processDefinitionId');
+
+    if (keyName == null || processDefinitionId == null) {
+        document.getElementById('errorPanelDiv').innerHTML = "The workflowName is null!";
+        document.getElementById("errorDiv").style.display = "block";
+    } else {
+        console.log(processDefinitionId);
+        $.ajax({
+            type: "POST",
+            url: getPhase3URL() + "/workflows/complete-task",
+            contentType: "application/json; charset=utf-8",
+            data : JSON.stringify({
+                'processDefinitionId' : processDefinitionId,
+                // word contained only in the name of the task to complete
+                'taskToComplete': "measure"
+            }),
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
 }

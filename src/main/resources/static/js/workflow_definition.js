@@ -20,13 +20,14 @@ var myWindow;
 function doRedirect() {
 	// Genera il link alla pagina che si desidera raggiungere
 	// myWindow.close();
-    myWindowlocation.href = getFrontbasePath() + '/models/deploy.html?modelId=' + idBusinessWorkflow;
+    myWindow.location.href = getFrontbasePath() + '/models/deploy.html?modelId=' + idBusinessWorkflow
+		+ "&name=" + getURLParameter('name');
     location.href = getPhase3URL() + "/activiti/activitiExplorerModeler/"
 			+ idBusinessWorkflow;
 }
 
 // populate business workflow
-function createWorkflowBusiness() {
+function createWorkflowBusiness(strategyId) {
 
     goToPopulateBusinessWorkflow();
 
@@ -40,11 +41,11 @@ function goToPopulateBusinessWorkflow() {
     var keyName = getURLParameter('name');
 
     if (keyName == null) {
-        document.getElementById('errorPanelDiv').innerHTML = "The MetaworkflowName is null!";
+        document.getElementById('errorPanelDiv').innerHTML = "The workflowName is null!";
         document.getElementById("errorDiv").style.display = "block";
     } else {
         $.ajax({
-            url: getPhase3URL() + "/activiti/instances?processDefinitionKey=" + keyName,
+            url: getPhase3URL() + "/activiti/instances?processDefinitionKey=" + keyName + "_workflow_handler",
             type: "GET",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -56,8 +57,13 @@ function goToPopulateBusinessWorkflow() {
                 console.log(processDefinitionId);
                 $.ajax({
                     type: "POST",
-                    url: getPhase3URL() + "/workflows/complete-task?processDefinitionId=" + processDefinitionId,
+                    url: getPhase3URL() + "/workflows/complete-task",
                     contentType: "application/json; charset=utf-8",
+                    data : JSON.stringify({
+                        'processDefinitionId' : processDefinitionId,
+						// word contained only in the name of the task to complete
+						'taskToComplete': "construction"
+                    }),
                     dataType: "json",
                     success: function (response) {
                         console.log(response);
@@ -111,19 +117,18 @@ function getStrategies(strategicPlanId) {
                     .then(function (data) {
                         var strategyWorkflow = JSON.parse(JSON.stringify(data));
                         idBusinessWorkflow = strategyWorkflow.workflow.businessWorkflowModelId;
-                        // idProcessDefinition = strategyWorkflow.workflow.businessWorkflowProcessDefinitionId;
                         $("#strategyDescription").fadeIn();
                         $('#strategyDescription').text(strategyDescription);
 
                         if (strategyWorkflow.strategy.status == 2) {
                             $("#button_create").text("Create Business workflow");
                             $("#button_create").on("click", function () {
-                                createWorkflowBusiness(strategyId);
+                                createWorkflowBusiness();
                             });
                         } else if (strategyWorkflow.strategy.status == 0) {
                             $("#button_create").text("Modify Business workflow");
                             $("#button_create").on("click", function () {
-                                createWorkflowBusiness(strategyId);
+                                createWorkflowBusiness();
                             });
                         } else if (strategyWorkflow.strategy.status == 1) {
                             $("#button_create").text("Visualize Business workflow");

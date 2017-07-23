@@ -33,6 +33,7 @@ function exportModelAjaxCall() {
 						var name = getURLParameter('name');
 						document.getElementById('successPanelDiv').innerHTML = "Workflow exported, the instance is "+name;
 						document.getElementById("successDiv").style.display = "block";
+						phase4init();
 					},
 					error : function(err) {
 						var json_obj = $.parseJSON(err.responseText);
@@ -54,4 +55,18 @@ function ExportButton() {
 		document.getElementById('checkboxWorkflow').disabled = true;
 		exportModelAjaxCall();
 	}
+}
+
+function phase4init() {
+    $.ajax({
+            type : "POST",
+            url : getPhase4URL() + "/bus/phase4Init",
+            contentType : "application/json; charset=utf-8",
+            success : function(response) {
+                console.log("phase 4 init OK" + response)
+            },
+            error : function(err) {
+                console.log("phase 4 init ERROR" + err)
+            }
+        });
 }

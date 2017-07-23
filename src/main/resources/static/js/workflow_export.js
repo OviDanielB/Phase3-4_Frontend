@@ -3,8 +3,6 @@ $(document)
 				function() {
 					checkSystemState();
 
-					goToExportWorkflow();
-
 					var name = getURLParameter('name');
 					$(".page-title-name").append(name);
 					document.getElementById('labelWorkflowExport').innerHTML = name;
@@ -56,44 +54,4 @@ function ExportButton() {
 		document.getElementById('checkboxWorkflow').disabled = true;
 		exportModelAjaxCall();
 	}
-}
-
-function goToExportWorkflow() {
-    var keyName = getURLParameter('name');
-
-    if (keyName == null) {
-        document.getElementById('errorPanelDiv').innerHTML = "The workflowName is null!";
-        document.getElementById("errorDiv").style.display = "block";
-    } else {
-        $.ajax({
-            url: getPhase3URL() + "/activiti/instances?processDefinitionKey=" + keyName + "_workflow_handler",
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-
-            success: function (response, textStatus, xhr) {
-                console.log(response);
-                var res = JSON.parse(JSON.stringify(response));
-                processDefinitionId = res.processDefinitionId;
-                console.log(processDefinitionId);
-                $.ajax({
-                    type: "POST",
-                    url: getPhase3URL() + "/workflows/complete-task",
-                    contentType: "application/json; charset=utf-8",
-                    data : JSON.stringify({
-                        'processDefinitionId' : processDefinitionId,
-                        // word contained only in the name of the task to complete
-                        'taskToComplete': "process"
-                    }),
-                    dataType: "json",
-                    success: function (response) {
-                        console.log(response);
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
-            }
-        });
-    }
 }

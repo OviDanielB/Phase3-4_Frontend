@@ -126,17 +126,6 @@ function getWorkflowName(strategyName, strategyid, status) {
         }
     };
     $.prompt(statesdemo);
-
-
 }
 
-function startConstruction() {
-    var stratId = getURLParameter("id");
-    if (stratId != null) {
-        window.location.href = "/workflow-definition.html?id="+stratId;
-    } else {
-        document.getElementById('errorPanelDiv').innerHTML = "The strategic plan id is null!";
-        document.getElementById("errorDiv").style.display = "block";
-    }
-}
 

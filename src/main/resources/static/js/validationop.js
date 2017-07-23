@@ -7,8 +7,6 @@ $(document).ready(function() {
 	
 	checkSystemState();
 
-	// goToPlanValidationOp();
-
     getMeasuresRef(processDefinitionId);
 
 	console.log(processDefinitionId);

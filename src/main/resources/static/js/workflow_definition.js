@@ -27,7 +27,7 @@ function doRedirect() {
 }
 
 // populate business workflow
-function createWorkflowBusiness(strategyId) {
+function createWorkflowBusiness() {
 
     goToPopulateBusinessWorkflow();
 

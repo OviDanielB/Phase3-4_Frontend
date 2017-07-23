@@ -109,7 +109,7 @@ function goToStartBusinessProcess() {
             data : JSON.stringify({
                 'processDefinitionId' : processDefinitionId,
                 // word contained only in the name of the task to complete
-                'taskToComplete': "measure"
+                'taskToComplete': "validation"
             }),
             dataType: "json",
             success: function (response) {

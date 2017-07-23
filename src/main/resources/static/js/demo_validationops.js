@@ -6,6 +6,9 @@ $(document).ready(function() {
 	checkSystemState();
 	
 	processDefinitionId = getURLParameter("processDefinitionId");
+
+	goToPlanValidationOp();
+
 	taskId = getURLParameter("taskId");
 	/*Il nome viene passato come parametro. */
 	name = getURLParameter("measureName");
@@ -108,4 +111,55 @@ function deleteValidation(validationId) {
 			alert(response.errorCode + " " + response.message);
 		}
 	});
+}
+
+
+function goToPlanValidationOp() {
+
+    var keyName = getURLParameter('name');
+
+    if (keyName == null) {
+        document.getElementById('errorPanelDiv').innerHTML = "The workflowName is null!";
+        document.getElementById("errorDiv").style.display = "block";
+    } else {
+        $.ajax({
+            url: getPhase3URL() + "/activiti/instances?processDefinitionKey=" + keyName + "_workflow_handler",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+
+            success: function (response, textStatus, xhr) {
+                console.log(response);
+                var res = JSON.parse(JSON.stringify(response));
+                processDefinitionId = res.processDefinitionId;
+                console.log(processDefinitionId);
+                $.ajax({
+                    type: "POST",
+                    url: getPhase3URL() + "/workflows/complete-task",
+                    contentType: "application/json; charset=utf-8",
+                    data : JSON.stringify({
+                        'processDefinitionId' : processDefinitionId,
+                        // word contained only in the name of the task to complete
+                        'taskToComplete': "measure"
+                    }),
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                        document.getElementById('successPanelDiv').innerHTML = response.businessWorkflowProcessInstanceId;
+                        document.getElementById("successDiv").style.display = "block";
+                    },
+                    error: function (err) {
+                        var json_obj = $.parseJSON(err.responseText);
+                        if (!json_obj.errorCode || !json_obj.message) {
+                            document.getElementById('errorPanelDiv').innerHTML = "Expired timeout interval";
+                        } else {
+                            document.getElementById('errorPanelDiv').innerHTML = json_obj.errorCode
+                                + json_obj.message;
+                        }
+                        document.getElementById("errorDiv").style.display = "block";
+                    }
+                });
+            }
+        });
+    }
 }

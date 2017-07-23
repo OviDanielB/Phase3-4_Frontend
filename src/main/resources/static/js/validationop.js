@@ -7,7 +7,7 @@ $(document).ready(function() {
 	
 	checkSystemState();
 
-	goToPlanValidationOp();
+	// goToPlanValidationOp();
 
     getMeasuresRef(processDefinitionId);
 
@@ -642,34 +642,4 @@ function updateValueType() {
 		$('#singleValueForm').hide();
 		$('#intervalValue').show();
 	}
-}
-
-function goToPlanValidationOp() {
-
-    var keyName = getURLParameter('name');
-    var processDefinitionId = getURLParameter('processDefinitionId');
-
-    if (keyName == null || processDefinitionId == null) {
-        document.getElementById('errorPanelDiv').innerHTML = "The workflowName is null!";
-        document.getElementById("errorDiv").style.display = "block";
-    } else {
-       			console.log(processDefinitionId);
-                $.ajax({
-                    type: "POST",
-                    url: getPhase3URL() + "/workflows/complete-task",
-                    contentType: "application/json; charset=utf-8",
-                    data : JSON.stringify({
-                        'processDefinitionId' : processDefinitionId,
-                        // word contained only in the name of the task to complete
-                        'taskToComplete': "measure"
-                    }),
-                    dataType: "json",
-                    success: function (response) {
-                        console.log(response);
-                    },
-                    error: function (err) {
-                    	console.log(err);
-                    }
-                });
-            }
 }

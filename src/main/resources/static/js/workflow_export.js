@@ -83,7 +83,7 @@ function goToExportWorkflow() {
                     data : JSON.stringify({
                         'processDefinitionId' : processDefinitionId,
                         // word contained only in the name of the task to complete
-                        'taskToComplete': "construction"
+                        'taskToComplete': "process"
                     }),
                     dataType: "json",
                     success: function (response) {

@@ -19,19 +19,22 @@ $(document).ready(function() {
 var myWindow;
 function doRedirect() {
 	// Genera il link alla pagina che si desidera raggiungere
-	// myWindow.close();
-    window.location.href = getFrontbasePath() + '/models/deploy.html?modelId=' + idBusinessWorkflow
-		+ "&name=" + getURLParameter('name');
+    myWindow.close();
     location.href = getPhase3URL() + "/activiti/activitiExplorerModeler/"
-			+ idBusinessWorkflow;
+        + idBusinessWorkflow;
+	// myWindow.close();
+    // window.location.href = getFrontbasePath() + '/models/deploy.html?modelId=' + idBusinessWorkflow
+	// 	+ "&name=" + getURLParameter('name');
+    // location.href = getPhase3URL() + "/activiti/activitiExplorerModeler/"
+	// 		+ idBusinessWorkflow;
 }
 
 // populate business workflow
 function createWorkflowBusiness() {
 
-	// myWindow = window.open(getPhase3URL() + "/activiti/activitiExplorerLogin/kermit/kermit");
+    myWindow = window.open(getPhase3URL() + "/activiti/activitiExplorerLogin/kermit/kermit");
 
-	window.setTimeout("doRedirect()", 2500);
+    window.setTimeout("doRedirect()", 2500);
 }
 
 function getStrategies(strategicPlanId) {

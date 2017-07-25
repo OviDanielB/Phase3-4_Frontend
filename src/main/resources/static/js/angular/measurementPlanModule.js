@@ -29,8 +29,6 @@ function ontologyController($scope, $http) {
     $scope.saveMeasPlan = function () {
         var measureTasksList = [];
 
-
-
         $scope.tasks.forEach(function (task) {
 
             var ontology = {};
@@ -60,7 +58,7 @@ function ontologyController($scope, $http) {
         };
 
         console.log(toSend);
-        $http.post(getPhase3URL()+"/measurement-plan", toSend);
+        $http.post(getPhase3URL() + "/measurement-plan", toSend);
     };
     
 
@@ -100,11 +98,8 @@ function ontologyController($scope, $http) {
 
         $scope.groups = response.data.groups;
         $scope.workflowData = response.data.workflowData;
-
-        console.log("ANGULAR" + JSON.stringify(response.data));
         var tasks = response.data.flowElements;
         tasks.forEach(function (task) {
-
             $scope.tasks.push(task);
         })
     },errorCallback);
